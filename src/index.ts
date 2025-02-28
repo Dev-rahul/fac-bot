@@ -87,40 +87,80 @@ const startMonitoring = async (opponentFactionId: number) => {
             const data = await response.json();
             const now = Math.floor(Date.now() / 1000);
 
-            // Filter members in hospital who will leave in 1-5 minutes
-            const soonToLeave = Object.values(data.members).filter((player: Player) => {
-                return (
-                    player.status.state === "Hospital" &&
-                    player.status.until - now > 60 && 
-                    player.status.until - now <= 300
-                );
-            });
+            // Filter and sort members in hospital who will leave in 1-5 minutes
+            const soonToLeave = (Object.values(data.members) as Player[])
+                .filter((player: Player) => {
+                    return (
+                        player.status.state === "Hospital" &&
+                        player.status.until - now > 60 && 
+                        player.status.until - now <= 300
+                    );
+                })
+                .sort((a: Player, b: Player) => {
+                    // Sorting by time left in the hospital (ascending)
+                    return (a.status.until - now) - (b.status.until - now);
+                });
 
             if (soonToLeave.length > 0) {
                 const channel = (await client.channels.fetch(CHANNEL_ID)) as TextChannel;
+                
+                // Send a header message for the new batch of alerts
+                if (soonToLeave.length > 0) {
+                    await channel.send({
+                        content: `━━━━━━━━━━━━━━ 🏥 **HOSPITAL ALERTS** 🏥 ━━━━━━━━━━━━━━`
+                    });
+                }
 
                 for (const player of soonToLeave) {
                     const minutesLeft = Math.ceil((player.status.until - now) / 60);
-
+                    
+                    // Format life status if available
+                    const lifeStatus = player.life ? 
+                        `\n**Health:** ${player.life.current}/${player.life.maximum} (${Math.floor((player.life.current/player.life.maximum)*100)}%)` : '';
+                    
+                    // Last action time
+                    const lastActionInfo = player.last_action ? 
+                        `\n**Last Action:** ${player.last_action.relative}` : '';
+                        
                     // Create attack button
                     const attackButton = new ButtonBuilder()
-                        .setLabel("⚔️ Attack")
+                        .setLabel("⚔️ Attack Now")
                         .setStyle(ButtonStyle.Link)
                         .setURL(`https://www.torn.com/loader.php?sid=attack&user2ID=${player.id}`);
+                        
+                    const profileButton = new ButtonBuilder()
+                        .setLabel("👤 View Profile")
+                        .setStyle(ButtonStyle.Link)
+                        .setURL(`https://www.torn.com/profiles.php?XID=${player.id}`);
 
-                    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(attackButton);
+                    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(attackButton, profileButton);
 
+                    // Create colorful divider with player info
                     await channel.send({
-                        content: `⚠️ **${player.name}** (Lvl ${player.level}) is leaving the hospital in ${minutesLeft} minutes!`,
-                        components: [row], 
+                        content: `══════════════════════════════════════════\n` +
+                                `👤 **${player.name}** (Level ${player.level})\n` +
+                                `⏰ Hospital exit in **${minutesLeft} minute${minutesLeft > 1 ? 's' : ''}**\n` +
+                                `🏢 Position: **${player.position}**\n` +
+                                `📅 Faction loyalty: **${player.days_in_faction} days**${lifeStatus}${lastActionInfo}\n` +
+                                `🔍 Status: *${player.status.description}*\n\n` +
+                                `${player.is_revivable ? '✅ Can be revived' : '❌ Cannot be revived'}` +
+                                `${player.has_early_discharge ? ' | ⚡ Has early discharge' : ''}\n\n` +
+                                `**Click a button below:**`,
+                        components: [row],
                     });
                 }
+                
+                // Send a footer divider
+                await channel.send({
+                    content: `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
+                });
             }
         } catch (error) {
             console.error("Error fetching opponent faction data:", error);
         }
     }, CHECK_INTERVAL);
 };
+
 
 client.login(BOT_TOKEN);
 
