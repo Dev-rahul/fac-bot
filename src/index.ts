@@ -592,7 +592,7 @@ const startMonitoring = async (opponentFactionId: number) => {
     await runMonitoringCycle();
     
     // Then set up interval
-    monitoringConfig.intervalId = setInterval(runMonitoringCycle, monitoringConfig.checkInterval);
+    monitoringConfig.intervalId = setInterval(runMonitoringCycle, monitoringConfig.checkInterval) as NodeJS.Timeout;
 };
 
 // Function to clear all messages in a channel
