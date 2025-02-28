@@ -1,0 +1,4257 @@
+{
+  "status": true,
+  "message": "War data found.",
+  "war": {
+    "id": 22602,
+    "war_id": 22643,
+    "faction_a_id": 11559,
+    "faction_a_name": "The Masters",
+    "faction_a_score": 510,
+    "faction_a_chain": 0,
+    "faction_b_id": 41702,
+    "faction_b_name": "Fatality",
+    "faction_b_score": 1403,
+    "faction_b_chain": 156,
+    "start": 1740751200,
+    "start_at": "2025-02-28T14:00:00.000000Z",
+    "end": 0,
+    "end_at": "-000001-11-30T00:00:00.000000Z",
+    "target": 12600,
+    "winner": 0,
+    "created_at": "2025-02-25T12:02:05.000000Z",
+    "updated_at": "2025-02-28T15:30:15.000000Z",
+    "faction_a_reward_respect": 0,
+    "faction_a_reward_points": 0,
+    "faction_a_end_rank": null,
+    "faction_b_reward_respect": 0,
+    "faction_b_reward_points": 0,
+    "faction_b_end_rank": null
+  },
+  "faction_a": {
+    "ID": 11559,
+    "name": "The Masters",
+    "tag": "TM",
+    "tag_image": "11559-68274.png",
+    "leader": 889354,
+    "co-leader": 2676448,
+    "respect": 4043151,
+    "age": 5755,
+    "capacity": 100,
+    "best_chain": 25000,
+    "territory_wars": [],
+    "raid_wars": [],
+    "peace": [],
+    "rank": {
+      "level": 14,
+      "name": "Platinum",
+      "division": 0,
+      "position": 0,
+      "wins": 14
+    },
+    "ranked_wars": {
+      "22643": {
+        "factions": {
+          "11559": { "name": "The Masters", "score": 510, "chain": 0 },
+          "41702": { "name": "Fatality", "score": 1403, "chain": 156 }
+        },
+        "war": { "start": 1740751200, "end": 0, "target": 12600, "winner": 0 }
+      }
+    },
+    "members": {
+      "467331": {
+        "name": "Maukun",
+        "level": 89,
+        "days_in_faction": 906,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755860,
+          "relative": "13 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 34 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2680294\">Retsgnag</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765897
+        },
+        "position": "Member",
+        "id": 467331,
+        "personalstats": {
+          "Xanax Taken": 1406,
+          "Stat Enhancers Used": 4,
+          "Networth": 70168403119,
+          "timestamp": 1740750982
+        }
+      },
+      "889354": {
+        "name": "Steven",
+        "level": 100,
+        "days_in_faction": 3799,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740754978,
+          "relative": "27 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756742
+        },
+        "position": "Leader",
+        "id": 889354,
+        "personalstats": {
+          "Xanax Taken": 6842,
+          "Stat Enhancers Used": 0,
+          "Networth": 31094094442,
+          "timestamp": 1740755051
+        }
+      },
+      "1185119": {
+        "name": "jayrocker3",
+        "level": 28,
+        "days_in_faction": 830,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740729624,
+          "relative": "7 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 21 secs",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=3364648\">Aligatorh</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756677
+        },
+        "position": "Member",
+        "id": 1185119,
+        "personalstats": {
+          "Xanax Taken": 194,
+          "Stat Enhancers Used": 0,
+          "Networth": 2473162030,
+          "timestamp": 1740337174
+        }
+      },
+      "1371761": {
+        "name": "FannyDoster",
+        "level": 44,
+        "days_in_faction": 379,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740755500,
+          "relative": "19 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 6 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760630
+        },
+        "position": "Member",
+        "id": 1371761,
+        "personalstats": {
+          "Xanax Taken": 185,
+          "Stat Enhancers Used": 0,
+          "Networth": 2380848530,
+          "timestamp": 1740751246
+        }
+      },
+      "1412840": {
+        "name": "ZAP5T3R",
+        "level": 99,
+        "days_in_faction": 4030,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751744,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 57 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1568593\">DeadbeatDonnie</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767317
+        },
+        "position": "Leadership",
+        "id": 1412840,
+        "personalstats": {
+          "Xanax Taken": 3134,
+          "Stat Enhancers Used": 0,
+          "Networth": 53642182241,
+          "timestamp": 1740731912
+        }
+      },
+      "1425288": {
+        "name": "Rotex",
+        "level": 57,
+        "days_in_faction": 106,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740743930,
+          "relative": "3 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 38 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1690255\">HUSTLER-BILLION</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740766146
+        },
+        "position": "Team 1",
+        "id": 1425288,
+        "personalstats": {
+          "Xanax Taken": 128,
+          "Stat Enhancers Used": 0,
+          "Networth": 6618545140,
+          "timestamp": 1740747433
+        }
+      },
+      "1741429": {
+        "name": "SmashMastrCrush",
+        "level": 35,
+        "days_in_faction": 360,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752183,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 35 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740766004
+        },
+        "position": "Staff",
+        "id": 1741429,
+        "personalstats": {
+          "Xanax Taken": 612,
+          "Stat Enhancers Used": 0,
+          "Networth": 2130473326,
+          "timestamp": 1740750984
+        }
+      },
+      "1864561": {
+        "name": "JRedSmooth",
+        "level": 100,
+        "days_in_faction": 3800,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755894,
+          "relative": "12 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 35 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758797
+        },
+        "position": "Leadership",
+        "id": 1864561,
+        "personalstats": {
+          "Xanax Taken": 5241,
+          "Stat Enhancers Used": 3,
+          "Networth": 20211744480,
+          "timestamp": 1740731903
+        }
+      },
+      "2179329": {
+        "name": "TownPeach",
+        "level": 17,
+        "days_in_faction": 162,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751057,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 20 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2991296\">Ac3dia</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757909
+        },
+        "position": "Team 1",
+        "id": 2179329,
+        "personalstats": {
+          "Xanax Taken": 155,
+          "Stat Enhancers Used": 0,
+          "Networth": 661242156,
+          "timestamp": 1740746324
+        }
+      },
+      "2196850": {
+        "name": "ZeehDroo",
+        "level": 32,
+        "days_in_faction": 403,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740674968,
+          "relative": "22 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 34 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1690255\">HUSTLER-BILLION</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765915
+        },
+        "position": "Member",
+        "id": 2196850,
+        "personalstats": {
+          "Xanax Taken": 149,
+          "Stat Enhancers Used": 0,
+          "Networth": 1729367223,
+          "timestamp": 1740337244
+        }
+      },
+      "2224316": {
+        "name": "LegeLibrum",
+        "level": 100,
+        "days_in_faction": 2230,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756419,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 21 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761533
+        },
+        "position": "Team 1",
+        "id": 2224316,
+        "personalstats": {
+          "Xanax Taken": 2997,
+          "Stat Enhancers Used": 0,
+          "Networth": 38519573085,
+          "timestamp": 1740731913
+        }
+      },
+      "2362436": {
+        "name": "bambaryla",
+        "level": 91,
+        "days_in_faction": 1464,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756511,
+          "relative": "2 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 5 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2014763\">Steelmann</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757006
+        },
+        "position": "Team 1",
+        "id": 2362436,
+        "personalstats": {
+          "Xanax Taken": 3361,
+          "Stat Enhancers Used": 0,
+          "Networth": 7918103519,
+          "timestamp": 1740755985
+        }
+      },
+      "2384926": {
+        "name": "PrincessKyra",
+        "level": 15,
+        "days_in_faction": 104,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756144,
+          "relative": "8 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 28 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758375
+        },
+        "position": "Member",
+        "id": 2384926,
+        "personalstats": {
+          "Xanax Taken": 490,
+          "Stat Enhancers Used": 0,
+          "Networth": 1214816886,
+          "timestamp": 1740752998
+        }
+      },
+      "2416579": {
+        "name": "Bushank",
+        "level": 95,
+        "days_in_faction": 1853,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1739997440,
+          "relative": "8 days ago"
+        },
+        "status": {
+          "description": "In hospital for 1 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=1369370\">PlayerUnknown</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756719
+        },
+        "position": "Leadership",
+        "id": 2416579,
+        "spy": {
+          "strength": 1029677541,
+          "defense": 1440246446,
+          "speed": 1000347987,
+          "dexterity": 1001006677,
+          "total": 4471278651,
+          "timestamp": 1740754256
+        },
+        "personalstats": {
+          "Xanax Taken": 4370,
+          "Stat Enhancers Used": 0,
+          "Networth": 7488114687,
+          "timestamp": 1740754293
+        }
+      },
+      "2479958": {
+        "name": "CykaPingu",
+        "level": 48,
+        "days_in_faction": 381,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740662195,
+          "relative": "1 day ago"
+        },
+        "status": {
+          "description": "In hospital for 9 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757204
+        },
+        "position": "Member",
+        "id": 2479958,
+        "personalstats": {
+          "Xanax Taken": 94,
+          "Stat Enhancers Used": 0,
+          "Networth": 1285258447,
+          "timestamp": 1740746322
+        }
+      },
+      "2480564": {
+        "name": "Pcarney06",
+        "level": 79,
+        "days_in_faction": 955,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740749566,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 10 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=96333\">Subrock</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757261
+        },
+        "position": "Member",
+        "id": 2480564,
+        "personalstats": {
+          "Xanax Taken": 1424,
+          "Stat Enhancers Used": 0,
+          "Networth": 7450801095,
+          "timestamp": 1740731937
+        }
+      },
+      "2498964": {
+        "name": "alarmantis",
+        "level": 45,
+        "days_in_faction": 1827,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755203,
+          "relative": "24 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 55 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2680294\">Retsgnag</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767190
+        },
+        "position": "Team 3",
+        "id": 2498964,
+        "personalstats": {
+          "Xanax Taken": 2503,
+          "Stat Enhancers Used": 0,
+          "Networth": 19807090139,
+          "timestamp": 1740751494
+        }
+      },
+      "2501071": {
+        "name": "SammyP90",
+        "level": 82,
+        "days_in_faction": 1825,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755857,
+          "relative": "13 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 80 hrs 46 mins ",
+          "details": "Overdosed on Xanax",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1741047460
+        },
+        "position": "Team 1",
+        "id": 2501071,
+        "personalstats": {
+          "Xanax Taken": 2049,
+          "Stat Enhancers Used": 1,
+          "Networth": 8158111390,
+          "timestamp": 1740731930
+        }
+      },
+      "2516538": {
+        "name": "Trijikon",
+        "level": 94,
+        "days_in_faction": 1608,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740749485,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 1 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=1369370\">PlayerUnknown</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756760
+        },
+        "position": "Team 2",
+        "id": 2516538,
+        "personalstats": {
+          "Xanax Taken": 2684,
+          "Stat Enhancers Used": 0,
+          "Networth": 19176702552,
+          "timestamp": 1740755902
+        }
+      },
+      "2518619": {
+        "name": "Sepesh",
+        "level": 80,
+        "days_in_faction": 957,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740749294,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 9 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=622226\">SuperChargers</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757198
+        },
+        "position": "Team 3",
+        "id": 2518619,
+        "personalstats": {
+          "Xanax Taken": 2974,
+          "Stat Enhancers Used": 0,
+          "Networth": 12164023878,
+          "timestamp": 1740752286
+        }
+      },
+      "2535364": {
+        "name": "lyam122",
+        "level": 100,
+        "days_in_faction": 1728,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751874,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 4 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1369370\">PlayerUnknown</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767738
+        },
+        "position": "Team 2",
+        "id": 2535364,
+        "personalstats": {
+          "Xanax Taken": 4451,
+          "Stat Enhancers Used": 0,
+          "Networth": 23344262687,
+          "timestamp": 1740751846
+        }
+      },
+      "2536273": {
+        "name": "deadalus29",
+        "level": 70,
+        "days_in_faction": 984,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755535,
+          "relative": "18 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 59 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760241
+        },
+        "position": "Team 3",
+        "id": 2536273,
+        "personalstats": {
+          "Xanax Taken": 1270,
+          "Stat Enhancers Used": 0,
+          "Networth": 24807968515,
+          "timestamp": 1740751275
+        }
+      },
+      "2537814": {
+        "name": "BK-ULTRA",
+        "level": 99,
+        "days_in_faction": 1663,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754481,
+          "relative": "36 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 33 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1995921\">rabbit</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740769472
+        },
+        "position": "Council",
+        "id": 2537814,
+        "personalstats": {
+          "Xanax Taken": 3985,
+          "Stat Enhancers Used": 1,
+          "Networth": 12094107699,
+          "timestamp": 1740751958
+        }
+      },
+      "2569485": {
+        "name": "Epic",
+        "level": 90,
+        "days_in_faction": 1662,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752172,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 1 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756763
+        },
+        "position": "Team 2",
+        "id": 2569485,
+        "personalstats": {
+          "Xanax Taken": 2768,
+          "Stat Enhancers Used": 0,
+          "Networth": 13205264909,
+          "timestamp": 1740731922
+        }
+      },
+      "2575614": {
+        "name": "Martiniriffic",
+        "level": 22,
+        "days_in_faction": 1537,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740711419,
+          "relative": "12 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 30 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1195126\">JessicaHills</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762093
+        },
+        "position": "Team 2",
+        "id": 2575614,
+        "personalstats": {
+          "Xanax Taken": 1352,
+          "Stat Enhancers Used": 0,
+          "Networth": 24843828606,
+          "timestamp": 1740751112
+        }
+      },
+      "2619004": {
+        "name": "Miardin",
+        "level": 61,
+        "days_in_faction": 381,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755653,
+          "relative": "16 minutes ago"
+        },
+        "status": {
+          "description": "Returning to Torn from UAE",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Member",
+        "id": 2619004,
+        "personalstats": {
+          "Xanax Taken": 314,
+          "Stat Enhancers Used": 0,
+          "Networth": 8500697325,
+          "timestamp": 1740749809
+        }
+      },
+      "2623858": {
+        "name": "n00b74360ps4",
+        "level": 31,
+        "days_in_faction": 402,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751229,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 5 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1690255\">HUSTLER-BILLION</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767792
+        },
+        "position": "Member",
+        "id": 2623858,
+        "personalstats": {
+          "Xanax Taken": 221,
+          "Stat Enhancers Used": 0,
+          "Networth": 968869505,
+          "timestamp": 1740337305
+        }
+      },
+      "2645562": {
+        "name": "PetitBleuCipher",
+        "level": 69,
+        "days_in_faction": 1014,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740746211,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 30 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762056
+        },
+        "position": "Staff",
+        "id": 2645562,
+        "personalstats": {
+          "Xanax Taken": 593,
+          "Stat Enhancers Used": 0,
+          "Networth": 4333932862,
+          "timestamp": 1740746311
+        }
+      },
+      "2649913": {
+        "name": "MaxMadFurryRoad",
+        "level": 69,
+        "days_in_faction": 958,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740730403,
+          "relative": "7 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 31 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1894357\">Polycosmos</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762156
+        },
+        "position": "Team 3",
+        "id": 2649913,
+        "personalstats": {
+          "Xanax Taken": 1077,
+          "Stat Enhancers Used": 0,
+          "Networth": 6920235445,
+          "timestamp": 1740746302
+        }
+      },
+      "2650638": {
+        "name": "HebrewHammer",
+        "level": 91,
+        "days_in_faction": 1422,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740755301,
+          "relative": "22 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 47 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1995921\">rabbit</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740770301
+        },
+        "position": "Team 2",
+        "id": 2650638,
+        "personalstats": {
+          "Xanax Taken": 2339,
+          "Stat Enhancers Used": 0,
+          "Networth": 6959666868,
+          "timestamp": 1740731928
+        }
+      },
+      "2672997": {
+        "name": "elonmuusk",
+        "level": 28,
+        "days_in_faction": 977,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740717636,
+          "relative": "10 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 22 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2065093\">Grumb</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761578
+        },
+        "position": "Team 4",
+        "id": 2672997,
+        "spy": {
+          "strength": 537006,
+          "defense": 705511,
+          "speed": 655384,
+          "dexterity": 1164150,
+          "total": 3062051,
+          "timestamp": 1732068781
+        },
+        "personalstats": {
+          "Xanax Taken": 565,
+          "Stat Enhancers Used": 0,
+          "Networth": 4640582387,
+          "timestamp": 1740746318
+        }
+      },
+      "2676448": {
+        "name": "Lord_Ultra",
+        "level": 93,
+        "days_in_faction": 1325,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756475,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 22 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761577
+        },
+        "position": "Co-leader",
+        "id": 2676448,
+        "personalstats": {
+          "Xanax Taken": 2248,
+          "Stat Enhancers Used": 0,
+          "Networth": 7579569948,
+          "timestamp": 1740751801
+        }
+      },
+      "2681445": {
+        "name": "Helen",
+        "level": 81,
+        "days_in_faction": 1164,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756567,
+          "relative": "1 minute ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 24 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761711
+        },
+        "position": "Team 3",
+        "id": 2681445,
+        "personalstats": {
+          "Xanax Taken": 1464,
+          "Stat Enhancers Used": 0,
+          "Networth": 3052606768,
+          "timestamp": 1740746297
+        }
+      },
+      "2684552": {
+        "name": "RedPistols",
+        "level": 35,
+        "days_in_faction": 1363,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754728,
+          "relative": "32 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 51 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759774
+        },
+        "position": "Team 1",
+        "id": 2684552,
+        "personalstats": {
+          "Xanax Taken": 459,
+          "Stat Enhancers Used": 0,
+          "Networth": 7317637349,
+          "timestamp": 1740746301
+        }
+      },
+      "2700864": {
+        "name": "Murderer",
+        "level": 64,
+        "days_in_faction": 351,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740704588,
+          "relative": "14 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 16 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757652
+        },
+        "position": "Member",
+        "id": 2700864,
+        "personalstats": {
+          "Xanax Taken": 145,
+          "Stat Enhancers Used": 0,
+          "Networth": 12383158333,
+          "timestamp": 1740753507
+        }
+      },
+      "2725752": {
+        "name": "Tonyhl",
+        "level": 40,
+        "days_in_faction": 103,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1738918303,
+          "relative": "21 days ago"
+        },
+        "status": {
+          "description": "In hospital for 11 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=3232053\">Egsy</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757374
+        },
+        "position": "Member",
+        "id": 2725752,
+        "personalstats": {
+          "Xanax Taken": 396,
+          "Stat Enhancers Used": 0,
+          "Networth": 86696789,
+          "timestamp": 1740337337
+        }
+      },
+      "2726460": {
+        "name": "scripper",
+        "level": 38,
+        "days_in_faction": 879,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740739120,
+          "relative": "4 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 mins ",
+          "details": "Attacked by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756818
+        },
+        "position": "Member",
+        "id": 2726460,
+        "personalstats": {
+          "Xanax Taken": 651,
+          "Stat Enhancers Used": 0,
+          "Networth": 1851792258,
+          "timestamp": 1740751741
+        }
+      },
+      "2738819": {
+        "name": "MastaZA",
+        "level": 75,
+        "days_in_faction": 959,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754013,
+          "relative": "44 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 7 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1195126\">JessicaHills</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760728
+        },
+        "position": "Council",
+        "id": 2738819,
+        "personalstats": {
+          "Xanax Taken": 2186,
+          "Stat Enhancers Used": 0,
+          "Networth": 8092438337,
+          "timestamp": 1740731934
+        }
+      },
+      "2751273": {
+        "name": "SweetFire2000",
+        "level": 54,
+        "days_in_faction": 823,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753425,
+          "relative": "53 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 28 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758378
+        },
+        "position": "Member",
+        "id": 2751273,
+        "personalstats": {
+          "Xanax Taken": 295,
+          "Stat Enhancers Used": 0,
+          "Networth": 4848287836,
+          "timestamp": 1740337356
+        }
+      },
+      "2754997": {
+        "name": "Dblackford1",
+        "level": 45,
+        "days_in_faction": 959,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756430,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 12 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2965664\">Tairys</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757433
+        },
+        "position": "Member",
+        "id": 2754997,
+        "personalstats": {
+          "Xanax Taken": 483,
+          "Stat Enhancers Used": 0,
+          "Networth": 1227698491,
+          "timestamp": 1740673739
+        }
+      },
+      "2761874": {
+        "name": "Docarillames",
+        "level": 40,
+        "days_in_faction": 961,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752121,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 8 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2965664\">Tairys</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757185
+        },
+        "position": "Member",
+        "id": 2761874,
+        "personalstats": {
+          "Xanax Taken": 254,
+          "Stat Enhancers Used": 0,
+          "Networth": 5253137594,
+          "timestamp": 1740751246
+        }
+      },
+      "2771823": {
+        "name": "Thaledas",
+        "level": 74,
+        "days_in_faction": 930,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751795,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 4 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756903
+        },
+        "position": "Team 4",
+        "id": 2771823,
+        "personalstats": {
+          "Xanax Taken": 796,
+          "Stat Enhancers Used": 0,
+          "Networth": 1666729121,
+          "timestamp": 1740338271
+        }
+      },
+      "2797298": {
+        "name": "Ko-Ju",
+        "level": 27,
+        "days_in_faction": 390,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754091,
+          "relative": "42 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 11 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757353
+        },
+        "position": "Member",
+        "id": 2797298,
+        "spy": {
+          "strength": 5000183,
+          "defense": 3000249,
+          "speed": 4440660,
+          "dexterity": 3001034,
+          "total": 15442126,
+          "timestamp": 1732069034
+        },
+        "personalstats": {
+          "Xanax Taken": 666,
+          "Stat Enhancers Used": 0,
+          "Networth": 225224674,
+          "timestamp": 1740337415
+        }
+      },
+      "2818632": {
+        "name": "Fridayy",
+        "level": 65,
+        "days_in_faction": 869,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740755112,
+          "relative": "25 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 21 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757964
+        },
+        "position": "Team 2",
+        "id": 2818632,
+        "personalstats": {
+          "Xanax Taken": 405,
+          "Stat Enhancers Used": 0,
+          "Networth": 3116125253,
+          "timestamp": 1740751304
+        }
+      },
+      "2842028": {
+        "name": "AimBot777",
+        "level": 45,
+        "days_in_faction": 137,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740741177,
+          "relative": "4 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 31 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1894357\">Polycosmos</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762127
+        },
+        "position": "Team 1",
+        "id": 2842028,
+        "personalstats": {
+          "Xanax Taken": 842,
+          "Stat Enhancers Used": 0,
+          "Networth": 3354233414,
+          "timestamp": 1740746308
+        }
+      },
+      "2857854": {
+        "name": "Abidax",
+        "level": 85,
+        "days_in_faction": 352,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740750718,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 45 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2438756\">gabe97</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762957
+        },
+        "position": "Staff",
+        "id": 2857854,
+        "personalstats": {
+          "Xanax Taken": 1743,
+          "Stat Enhancers Used": 0,
+          "Networth": 6330672971,
+          "timestamp": 1740746293
+        }
+      },
+      "2865837": {
+        "name": "Herbagoodgrl",
+        "level": 61,
+        "days_in_faction": 761,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740731019,
+          "relative": "7 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 13 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761074
+        },
+        "position": "Team 2",
+        "id": 2865837,
+        "personalstats": {
+          "Xanax Taken": 597,
+          "Stat Enhancers Used": 0,
+          "Networth": 2431257690,
+          "timestamp": 1740746316
+        }
+      },
+      "2873019": {
+        "name": "GTheK",
+        "level": 45,
+        "days_in_faction": 418,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753741,
+          "relative": "48 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 7 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2991296\">Ac3dia</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757098
+        },
+        "position": "Member",
+        "id": 2873019,
+        "personalstats": {
+          "Xanax Taken": 105,
+          "Stat Enhancers Used": 0,
+          "Networth": 1163987402,
+          "timestamp": 1740337423
+        }
+      },
+      "2889383": {
+        "name": "Ammaged",
+        "level": 20,
+        "days_in_faction": 587,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740754150,
+          "relative": "41 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 19 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=3013065\">DevonteJones</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765032
+        },
+        "position": "Team 2",
+        "id": 2889383,
+        "personalstats": {
+          "Xanax Taken": 239,
+          "Stat Enhancers Used": 0,
+          "Networth": 990174323,
+          "timestamp": 1740746320
+        }
+      },
+      "2900996": {
+        "name": "pr0sal",
+        "level": 66,
+        "days_in_faction": 402,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756330,
+          "relative": "5 minutes ago"
+        },
+        "status": {
+          "description": "Returning to Torn from UAE",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Team 4",
+        "id": 2900996,
+        "personalstats": {
+          "Xanax Taken": 736,
+          "Stat Enhancers Used": 0,
+          "Networth": 859000177,
+          "timestamp": 1740749819
+        }
+      },
+      "2998056": {
+        "name": "wrathmachine",
+        "level": 39,
+        "days_in_faction": 119,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740753270,
+          "relative": "56 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 6 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757035
+        },
+        "position": "Member",
+        "id": 2998056,
+        "personalstats": {
+          "Xanax Taken": 130,
+          "Stat Enhancers Used": 0,
+          "Networth": 1046232116,
+          "timestamp": 1740337433
+        }
+      },
+      "3034157": {
+        "name": "LordOfThunder",
+        "level": 35,
+        "days_in_faction": 517,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754157,
+          "relative": "41 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756761
+        },
+        "position": "Staff",
+        "id": 3034157,
+        "personalstats": {
+          "Xanax Taken": 1179,
+          "Stat Enhancers Used": 0,
+          "Networth": 3607152075,
+          "timestamp": 1740746305
+        }
+      },
+      "3044099": {
+        "name": "xXxBIu3D3mOnxXx",
+        "level": 26,
+        "days_in_faction": 162,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740668500,
+          "relative": "1 day ago"
+        },
+        "status": {
+          "description": "In hospital for 19 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757850
+        },
+        "position": "Member",
+        "id": 3044099,
+        "personalstats": {
+          "Xanax Taken": 36,
+          "Stat Enhancers Used": 0,
+          "Networth": 150811274,
+          "timestamp": 1740337445
+        }
+      },
+      "3046466": {
+        "name": "8all8ag",
+        "level": 62,
+        "days_in_faction": 393,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740724677,
+          "relative": "8 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 1 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1690255\">HUSTLER-BILLION</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767555
+        },
+        "position": "Team 4",
+        "id": 3046466,
+        "personalstats": {
+          "Xanax Taken": 384,
+          "Stat Enhancers Used": 0,
+          "Networth": 330810914,
+          "timestamp": 1740746313
+        }
+      },
+      "3150230": {
+        "name": "Krolaun",
+        "level": 50,
+        "days_in_faction": 466,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755029,
+          "relative": "27 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 9 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2965664\">Tairys</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740764414
+        },
+        "position": "Team 4",
+        "id": 3150230,
+        "personalstats": {
+          "Xanax Taken": 671,
+          "Stat Enhancers Used": 0,
+          "Networth": 1949432165,
+          "timestamp": 1740751306
+        }
+      },
+      "3153489": {
+        "name": "MaDdOg600614",
+        "level": 50,
+        "days_in_faction": 460,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755760,
+          "relative": "14 minutes ago"
+        },
+        "status": {
+          "description": "Returning to Torn from South Africa",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Team 4",
+        "id": 3153489,
+        "personalstats": {
+          "Xanax Taken": 929,
+          "Stat Enhancers Used": 0,
+          "Networth": 3634985877,
+          "timestamp": 1740748088
+        }
+      },
+      "3169111": {
+        "name": "Rosko87",
+        "level": 41,
+        "days_in_faction": 403,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740752010,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 58 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2680294\">Retsgnag</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767364
+        },
+        "position": "Member",
+        "id": 3169111,
+        "personalstats": {
+          "Xanax Taken": 103,
+          "Stat Enhancers Used": 0,
+          "Networth": 614452758,
+          "timestamp": 1740751229
+        }
+      },
+      "3198865": {
+        "name": "alexcess",
+        "level": 15,
+        "days_in_faction": 160,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740718409,
+          "relative": "10 hours ago"
+        },
+        "status": {
+          "description": "In Hawaii",
+          "details": "",
+          "state": "Abroad",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Member",
+        "id": 3198865,
+        "personalstats": {
+          "Xanax Taken": 66,
+          "Stat Enhancers Used": 0,
+          "Networth": 783250241,
+          "timestamp": 1740753062
+        }
+      },
+      "3203216": {
+        "name": "LividLivesey",
+        "level": 22,
+        "days_in_faction": 396,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740748484,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 13 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761073
+        },
+        "position": "Member",
+        "id": 3203216,
+        "personalstats": {
+          "Xanax Taken": 44,
+          "Stat Enhancers Used": 0,
+          "Networth": 197024339,
+          "timestamp": 1740751418
+        }
+      },
+      "3203540": {
+        "name": "Porro",
+        "level": 26,
+        "days_in_faction": 397,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740754181,
+          "relative": "41 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 40 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759056
+        },
+        "position": "Member",
+        "id": 3203540,
+        "personalstats": {
+          "Xanax Taken": 124,
+          "Stat Enhancers Used": 0,
+          "Networth": 635655487,
+          "timestamp": 1740337920
+        }
+      },
+      "3221564": {
+        "name": "Davisa16",
+        "level": 21,
+        "days_in_faction": 149,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740716707,
+          "relative": "11 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 11 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=1396541\">3RIK</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757316
+        },
+        "position": "Member",
+        "id": 3221564,
+        "personalstats": {
+          "Xanax Taken": 17,
+          "Stat Enhancers Used": 0,
+          "Networth": 255629318,
+          "timestamp": 1740752293
+        }
+      },
+      "3249852": {
+        "name": "Pilottalk",
+        "level": 36,
+        "days_in_faction": 302,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756612,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 25 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758201
+        },
+        "position": "Team 1",
+        "id": 3249852,
+        "personalstats": {
+          "Xanax Taken": 289,
+          "Stat Enhancers Used": 0,
+          "Networth": 350265964,
+          "timestamp": 1740754157
+        }
+      },
+      "3289713": {
+        "name": "Akiriuu",
+        "level": 19,
+        "days_in_faction": 281,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740373432,
+          "relative": "4 days ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Member",
+        "id": 3289713,
+        "personalstats": {
+          "Xanax Taken": 6,
+          "Stat Enhancers Used": 0,
+          "Networth": 455456718,
+          "timestamp": 1740717504
+        }
+      },
+      "3292338": {
+        "name": "KameoBoi",
+        "level": 20,
+        "days_in_faction": 278,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740630805,
+          "relative": "1 day ago"
+        },
+        "status": {
+          "description": "In hospital for 4 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2992584\">MrVigerous</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756945
+        },
+        "position": "Member",
+        "id": 3292338,
+        "personalstats": {
+          "Xanax Taken": 35,
+          "Stat Enhancers Used": 0,
+          "Networth": 77885312,
+          "timestamp": 1740337651
+        }
+      },
+      "3329297": {
+        "name": "Marski",
+        "level": 40,
+        "days_in_faction": 126,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740748468,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 16 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761262
+        },
+        "position": "Team 3",
+        "id": 3329297,
+        "personalstats": {
+          "Xanax Taken": 110,
+          "Stat Enhancers Used": 0,
+          "Networth": 279584033,
+          "timestamp": 1740717496
+        }
+      },
+      "3332665": {
+        "name": "Frezz1",
+        "level": 33,
+        "days_in_faction": 162,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740682488,
+          "relative": "20 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 3 mins ",
+          "details": "Attacked by <a href = \"http://www.torn.com/profiles.php?XID=2795247\">KanPowers</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740756836
+        },
+        "position": "Team 4",
+        "id": 3332665,
+        "personalstats": {
+          "Xanax Taken": 107,
+          "Stat Enhancers Used": 0,
+          "Networth": 304836671,
+          "timestamp": 1740717498
+        }
+      },
+      "3362774": {
+        "name": "Martinator1",
+        "level": 26,
+        "days_in_faction": 105,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740748163,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 51 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740770555
+        },
+        "position": "Member",
+        "id": 3362774,
+        "personalstats": {
+          "Xanax Taken": 101,
+          "Stat Enhancers Used": 0,
+          "Networth": 199371818,
+          "timestamp": 1740753071
+        }
+      },
+      "3373600": {
+        "name": "Coonrad",
+        "level": 33,
+        "days_in_faction": 160,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754157,
+          "relative": "41 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 20 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757879
+        },
+        "position": "Team 3",
+        "id": 3373600,
+        "spy": {
+          "strength": 18910,
+          "defense": 18913,
+          "speed": 18920,
+          "dexterity": 18902,
+          "total": 75645,
+          "timestamp": 1732068881
+        },
+        "personalstats": {
+          "Xanax Taken": 113,
+          "Stat Enhancers Used": 0,
+          "Networth": 3113389308,
+          "timestamp": 1740717494
+        }
+      }
+    },
+    "chain": {
+      "current": 0,
+      "max": 10,
+      "timeout": 0,
+      "modifier": 1,
+      "cooldown": 0,
+      "start": 0,
+      "end": 1740756656
+    },
+    "spies": [3062051, 75645, 15442126, 4471278651]
+  },
+  "faction_b": {
+    "ID": 41702,
+    "name": "Fatality",
+    "tag": "FA",
+    "tag_image": "41702-76179.png",
+    "leader": 1369370,
+    "co-leader": 1995921,
+    "respect": 1950924,
+    "age": 2326,
+    "capacity": 100,
+    "best_chain": 10000,
+    "territory_wars": [],
+    "raid_wars": [],
+    "rank": {
+      "level": 14,
+      "name": "Platinum",
+      "division": 0,
+      "position": 0,
+      "wins": 34
+    },
+    "ranked_wars": {
+      "22643": {
+        "factions": {
+          "11559": { "name": "The Masters", "score": 510, "chain": 0 },
+          "41702": { "name": "Fatality", "score": 1403, "chain": 156 }
+        },
+        "war": { "start": 1740751200, "end": 0, "target": 12600, "winner": 0 }
+      }
+    },
+    "members": {
+      "19739": {
+        "name": "Omologato",
+        "level": 88,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756240,
+          "relative": "6 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 19739,
+        "personalstats": {
+          "Xanax Taken": 65,
+          "Stat Enhancers Used": 0,
+          "Networth": 27073461556,
+          "timestamp": 1739646856
+        }
+      },
+      "96333": {
+        "name": "Subrock",
+        "level": 69,
+        "days_in_faction": 3,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756126,
+          "relative": "8 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 36 mins ",
+          "details": "Got a nasty surprise in the post.",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740769647
+        },
+        "position": "Soldier",
+        "id": 96333,
+        "personalstats": {
+          "Xanax Taken": 3286,
+          "Stat Enhancers Used": 0,
+          "Networth": 12739711208,
+          "timestamp": 1740752777
+        }
+      },
+      "158417": {
+        "name": "-CA-brainless",
+        "level": 100,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755299,
+          "relative": "22 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 158417,
+        "spy": {
+          "strength": 1506261169,
+          "defense": 492740154,
+          "speed": 500063792,
+          "dexterity": 543889816,
+          "total": 3042954931,
+          "timestamp": 1740750802
+        },
+        "personalstats": {
+          "Xanax Taken": 2953,
+          "Stat Enhancers Used": 0,
+          "Networth": 6994809237,
+          "timestamp": 1740751683
+        }
+      },
+      "540265": {
+        "name": "prince_lyon",
+        "level": 76,
+        "days_in_faction": 108,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740732814,
+          "relative": "6 hours ago"
+        },
+        "status": {
+          "description": "In a South African hospital for 2 hrs 35 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765960
+        },
+        "position": "Soldier",
+        "id": 540265,
+        "personalstats": {
+          "Xanax Taken": 1304,
+          "Stat Enhancers Used": 0,
+          "Networth": 27707429530,
+          "timestamp": 1740525477
+        }
+      },
+      "541808": {
+        "name": "UFO",
+        "level": 58,
+        "days_in_faction": 8,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740725433,
+          "relative": "8 hours ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 541808,
+        "spy": {
+          "strength": 295743351,
+          "defense": 442788652,
+          "speed": 296727730,
+          "dexterity": 71949398,
+          "total": 1107209131,
+          "timestamp": 1740721689
+        },
+        "personalstats": {
+          "Xanax Taken": 402,
+          "Stat Enhancers Used": 0,
+          "Networth": 7971121938,
+          "timestamp": 1740718492
+        }
+      },
+      "622226": {
+        "name": "SuperChargers",
+        "level": 89,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756630,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 622226,
+        "personalstats": {
+          "Xanax Taken": 2213,
+          "Stat Enhancers Used": 0,
+          "Networth": 26087207947,
+          "timestamp": 1740755399
+        }
+      },
+      "910409": {
+        "name": "Aussie_Rob",
+        "level": 99,
+        "days_in_faction": 248,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752923,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 36 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2552212\">OldTrashPanda</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740766065
+        },
+        "position": "Captain",
+        "id": 910409,
+        "spy": {
+          "strength": 1532311533,
+          "defense": 1019706918,
+          "speed": 1214739271,
+          "dexterity": 1000139243,
+          "total": 4766896965,
+          "timestamp": 1740709181
+        },
+        "personalstats": {
+          "Xanax Taken": 3983,
+          "Stat Enhancers Used": 0,
+          "Networth": 14371558215,
+          "timestamp": 1740750889
+        }
+      },
+      "1346907": {
+        "name": "baustelac",
+        "level": 90,
+        "days_in_faction": 240,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756475,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Captain",
+        "id": 1346907,
+        "spy": {
+          "strength": 3183538612,
+          "defense": 1067017862,
+          "speed": 1747065289,
+          "dexterity": 1063737468,
+          "total": 7061359231,
+          "timestamp": 1740706826
+        },
+        "personalstats": {
+          "Xanax Taken": 5683,
+          "Stat Enhancers Used": 1,
+          "Networth": 8118838857,
+          "timestamp": 1740751623
+        }
+      },
+      "1369370": {
+        "name": "PlayerUnknown",
+        "level": 100,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756432,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Leader",
+        "id": 1369370,
+        "spy": {
+          "strength": 2265238418,
+          "defense": 13126728951,
+          "speed": 1947772594,
+          "dexterity": 1001824815,
+          "total": 18341564778,
+          "timestamp": 1740754338
+        },
+        "personalstats": {
+          "Xanax Taken": 6734,
+          "Stat Enhancers Used": 164,
+          "Networth": 282630417963,
+          "timestamp": 1740756199
+        }
+      },
+      "1396541": {
+        "name": "3RIK",
+        "level": 49,
+        "days_in_faction": 265,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756645,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Jnr NCO",
+        "id": 1396541,
+        "spy": {
+          "strength": 6006828,
+          "defense": 1007098,
+          "speed": 455662,
+          "dexterity": 33555,
+          "total": 7503143,
+          "timestamp": 1740721421
+        },
+        "personalstats": {
+          "Xanax Taken": 217,
+          "Stat Enhancers Used": 0,
+          "Networth": 227706517,
+          "timestamp": 1740579806
+        }
+      },
+      "1413767": {
+        "name": "maxorke",
+        "level": 75,
+        "days_in_faction": 207,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756432,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 48 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=288677\">Belladonna</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759553
+        },
+        "position": "Jnr NCO",
+        "id": 1413767,
+        "spy": {
+          "strength": 1920197556,
+          "defense": 736798053,
+          "speed": 787346670,
+          "dexterity": 13428,
+          "total": 3444355707,
+          "timestamp": 1740717808
+        },
+        "personalstats": {
+          "Xanax Taken": 2327,
+          "Stat Enhancers Used": 0,
+          "Networth": 6045835125,
+          "timestamp": 1740579797
+        }
+      },
+      "1470835": {
+        "name": "Mystified",
+        "level": 100,
+        "days_in_faction": 248,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1727255613,
+          "relative": "156 days ago"
+        },
+        "status": {
+          "description": "Fallen",
+          "details": "Resting in Peace",
+          "state": "Fallen",
+          "color": "red",
+          "until": 0
+        },
+        "position": "Immortal",
+        "id": 1470835,
+        "spy": {
+          "strength": 3583619521,
+          "defense": 2725312314,
+          "speed": 3335984523,
+          "dexterity": 2500099513,
+          "total": 12145015871,
+          "timestamp": 1727832954
+        },
+        "personalstats": {
+          "Xanax Taken": 9555,
+          "Stat Enhancers Used": 10,
+          "Networth": 26455107933,
+          "timestamp": 1740750164
+        }
+      },
+      "1474127": {
+        "name": "Stylin",
+        "level": 100,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740755677,
+          "relative": "16 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 1474127,
+        "personalstats": {
+          "Xanax Taken": 8381,
+          "Stat Enhancers Used": 10,
+          "Networth": 663279055482,
+          "timestamp": 1740637981
+        }
+      },
+      "1507229": {
+        "name": "AztecWolf",
+        "level": 81,
+        "days_in_faction": 95,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740749226,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 4 hrs 6 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740771465
+        },
+        "position": "Soldier",
+        "id": 1507229,
+        "spy": {
+          "strength": 287155242,
+          "defense": 367874821,
+          "speed": 284211942,
+          "dexterity": 69565833,
+          "total": 1008807838,
+          "timestamp": 1740712857
+        },
+        "personalstats": {
+          "Xanax Taken": 2795,
+          "Stat Enhancers Used": 1,
+          "Networth": 9774578450,
+          "timestamp": 1740748578
+        }
+      },
+      "1540930": {
+        "name": "Darkstar",
+        "level": 91,
+        "days_in_faction": 248,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754642,
+          "relative": "33 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 38 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=1953078\">balamuc</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762544
+        },
+        "position": "Leadership",
+        "id": 1540930,
+        "spy": {
+          "strength": 900403638,
+          "defense": 479121001,
+          "speed": 741573957,
+          "dexterity": 10683436,
+          "total": 2131782032,
+          "timestamp": 1740707483
+        },
+        "personalstats": {
+          "Xanax Taken": 2681,
+          "Stat Enhancers Used": 0,
+          "Networth": 27038665363,
+          "timestamp": 1740597634
+        }
+      },
+      "1642736": {
+        "name": "ThatHypesGuy",
+        "level": 58,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756437,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 1642736,
+        "personalstats": {
+          "Xanax Taken": 432,
+          "Stat Enhancers Used": 0,
+          "Networth": 7540895952,
+          "timestamp": 1740755264
+        }
+      },
+      "1690255": {
+        "name": "HUSTLER-BILLION",
+        "level": 71,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752010,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 1690255,
+        "personalstats": {
+          "Xanax Taken": 291,
+          "Stat Enhancers Used": 0,
+          "Networth": 13598603754,
+          "timestamp": 1740751173
+        }
+      },
+      "1744966": {
+        "name": "Kakorot",
+        "level": 64,
+        "days_in_faction": 95,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754993,
+          "relative": "27 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Intelligence Officer",
+        "id": 1744966,
+        "spy": {
+          "strength": 3021407,
+          "defense": 7835894,
+          "speed": 20149929,
+          "dexterity": 10140556,
+          "total": 41147786,
+          "timestamp": 1740717677
+        },
+        "personalstats": {
+          "Xanax Taken": 1224,
+          "Stat Enhancers Used": 0,
+          "Networth": 2534234749,
+          "timestamp": 1740579797
+        }
+      },
+      "1746371": {
+        "name": "LeahKiller",
+        "level": 100,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751063,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "Returning to Torn from Switzerland",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Leadership",
+        "id": 1746371,
+        "personalstats": {
+          "Xanax Taken": 3917,
+          "Stat Enhancers Used": 0,
+          "Networth": 44483077788,
+          "timestamp": 1740515359
+        }
+      },
+      "1808763": {
+        "name": "Teddy1228",
+        "level": 56,
+        "days_in_faction": 94,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740740468,
+          "relative": "4 hours ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 1808763,
+        "spy": {
+          "strength": 125820422,
+          "defense": 1171128,
+          "speed": 115457960,
+          "dexterity": 376150,
+          "total": 242825660,
+          "timestamp": 1740722839
+        },
+        "personalstats": {
+          "Xanax Taken": 203,
+          "Stat Enhancers Used": 1,
+          "Networth": 951071229,
+          "timestamp": 1740697551
+        }
+      },
+      "1883447": {
+        "name": "QuickDollar",
+        "level": 63,
+        "days_in_faction": 94,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740678396,
+          "relative": "21 hours ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 1883447,
+        "personalstats": {
+          "Xanax Taken": 1489,
+          "Stat Enhancers Used": 4,
+          "Networth": 13048711169,
+          "timestamp": 1740682890
+        }
+      },
+      "1995921": {
+        "name": "rabbit",
+        "level": 100,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756630,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Co-leader",
+        "id": 1995921,
+        "spy": {
+          "strength": 1665815518,
+          "defense": 3652625108,
+          "speed": 1600092042,
+          "dexterity": 476839658,
+          "total": 7395372326,
+          "timestamp": 1740752983
+        },
+        "personalstats": {
+          "Xanax Taken": 5660,
+          "Stat Enhancers Used": 1,
+          "Networth": -29545863,
+          "timestamp": 1740751608
+        }
+      },
+      "2014763": {
+        "name": "Steelmann",
+        "level": 93,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756600,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2014763,
+        "spy": {
+          "strength": 765423643,
+          "defense": 1003298936,
+          "speed": 685475743,
+          "dexterity": 554724009,
+          "total": 3008922331,
+          "timestamp": 1740707881
+        },
+        "personalstats": {
+          "Xanax Taken": 3892,
+          "Stat Enhancers Used": 0,
+          "Networth": 2860850864,
+          "timestamp": 1740579788
+        }
+      },
+      "2121376": {
+        "name": "Serviros",
+        "level": 56,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740755247,
+          "relative": "23 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 29 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758408
+        },
+        "position": "Jnr NCO",
+        "id": 2121376,
+        "spy": {
+          "strength": 847979,
+          "defense": 443057,
+          "speed": 819023,
+          "dexterity": 471315,
+          "total": 2581374,
+          "timestamp": 1740716237
+        },
+        "personalstats": {
+          "Xanax Taken": 767,
+          "Stat Enhancers Used": 0,
+          "Networth": 1823360794,
+          "timestamp": 1740754557
+        }
+      },
+      "2148276": {
+        "name": "Princess-Ginger",
+        "level": 75,
+        "days_in_faction": 3,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754085,
+          "relative": "42 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 15 mins ",
+          "details": "Suffering from an acute hemolytic transfusion reaction",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740757598
+        },
+        "position": "Soldier",
+        "id": 2148276,
+        "personalstats": {
+          "Xanax Taken": 4187,
+          "Stat Enhancers Used": 0,
+          "Networth": 15787506493,
+          "timestamp": 1740750472
+        }
+      },
+      "2159205": {
+        "name": "Sargeant_Rock",
+        "level": 89,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740746770,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 44 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=995646\">Zakkk</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762928
+        },
+        "position": "Soldier",
+        "id": 2159205,
+        "personalstats": {
+          "Xanax Taken": 3363,
+          "Stat Enhancers Used": 0,
+          "Networth": 12546695677,
+          "timestamp": 1740471899
+        }
+      },
+      "2187816": {
+        "name": "-HighlySuspect-",
+        "level": 90,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740728924,
+          "relative": "7 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 55 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2655819\">Wile_E_Coyote</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740763575
+        },
+        "position": "Soldier",
+        "id": 2187816,
+        "personalstats": {
+          "Xanax Taken": 1804,
+          "Stat Enhancers Used": 0,
+          "Networth": 1469900796,
+          "timestamp": 1739573839
+        }
+      },
+      "2196306": {
+        "name": "bacer",
+        "level": 35,
+        "days_in_faction": 242,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751528,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 10 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2980931\">Rodtod</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760861
+        },
+        "position": "Jnr NCO",
+        "id": 2196306,
+        "spy": {
+          "strength": 148702,
+          "defense": 140865,
+          "speed": 143076,
+          "dexterity": 145346,
+          "total": 577989,
+          "timestamp": 1740717436
+        },
+        "personalstats": {
+          "Xanax Taken": 384,
+          "Stat Enhancers Used": 0,
+          "Networth": 2488581681,
+          "timestamp": 1740579796
+        }
+      },
+      "2249533": {
+        "name": "Jdub92",
+        "level": 70,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740730504,
+          "relative": "7 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 58 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2362436\">bambaryla</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760159
+        },
+        "position": "Vice-Captain",
+        "id": 2249533,
+        "personalstats": {
+          "Xanax Taken": 1331,
+          "Stat Enhancers Used": 0,
+          "Networth": 3922104506,
+          "timestamp": 1739919118
+        }
+      },
+      "2253902": {
+        "name": "RagingGuns",
+        "level": 87,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756610,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2253902,
+        "personalstats": {
+          "Xanax Taken": 1658,
+          "Stat Enhancers Used": 0,
+          "Networth": 689813829,
+          "timestamp": 1740756107
+        }
+      },
+      "2267389": {
+        "name": "JimboJammies",
+        "level": 50,
+        "days_in_faction": 30,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740738298,
+          "relative": "5 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 45 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2170094\">P00CH</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740766575
+        },
+        "position": "Soldier",
+        "id": 2267389,
+        "spy": {
+          "strength": 20549111,
+          "defense": 70770860,
+          "speed": 17421933,
+          "dexterity": 75461722,
+          "total": 184203626,
+          "timestamp": 1740719852
+        },
+        "personalstats": {
+          "Xanax Taken": 132,
+          "Stat Enhancers Used": 0,
+          "Networth": 3830443202,
+          "timestamp": 1740579801
+        }
+      },
+      "2273920": {
+        "name": "Bricktop247",
+        "level": 51,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740514425,
+          "relative": "2 days ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2273920,
+        "personalstats": {
+          "Xanax Taken": 540,
+          "Stat Enhancers Used": 0,
+          "Networth": 8543792562,
+          "timestamp": 1739283374
+        }
+      },
+      "2304054": {
+        "name": "Gmclendon28",
+        "level": 55,
+        "days_in_faction": 207,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740546012,
+          "relative": "2 days ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2304054,
+        "spy": {
+          "strength": 5006806,
+          "defense": 4810986,
+          "speed": 4784238,
+          "dexterity": 5006987,
+          "total": 19609017,
+          "timestamp": 1740711027
+        },
+        "personalstats": {
+          "Xanax Taken": 383,
+          "Stat Enhancers Used": 3,
+          "Networth": 1104323543,
+          "timestamp": 1740579789
+        }
+      },
+      "2350301": {
+        "name": "Cinnamine",
+        "level": 57,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751729,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 48 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2536273\">deadalus29</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759590
+        },
+        "position": "Soldier",
+        "id": 2350301,
+        "personalstats": {
+          "Xanax Taken": 965,
+          "Stat Enhancers Used": 0,
+          "Networth": 142623392,
+          "timestamp": 1740363539
+        }
+      },
+      "2393196": {
+        "name": "Chris07",
+        "level": 50,
+        "days_in_faction": 208,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740693086,
+          "relative": "17 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 23 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2170094\">P00CH</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765242
+        },
+        "position": "Soldier",
+        "id": 2393196,
+        "spy": {
+          "strength": 10002516,
+          "defense": 7553368,
+          "speed": 10003116,
+          "dexterity": 7351113,
+          "total": 34910113,
+          "timestamp": 1740711513
+        },
+        "personalstats": {
+          "Xanax Taken": 783,
+          "Stat Enhancers Used": 0,
+          "Networth": 3854766471,
+          "timestamp": 1740579790
+        }
+      },
+      "2476868": {
+        "name": "-Naj-",
+        "level": 51,
+        "days_in_faction": 95,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740748234,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "In Hawaii",
+          "details": "",
+          "state": "Abroad",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2476868,
+        "spy": {
+          "strength": 410091,
+          "defense": 336079,
+          "speed": 359830,
+          "dexterity": 369020,
+          "total": 1475020,
+          "timestamp": 1740712272
+        },
+        "personalstats": {
+          "Xanax Taken": 247,
+          "Stat Enhancers Used": 0,
+          "Networth": 1067721515,
+          "timestamp": 1740697551
+        }
+      },
+      "2546819": {
+        "name": "Dakarin",
+        "level": 84,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740673998,
+          "relative": "22 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 11 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740764524
+        },
+        "position": "Soldier",
+        "id": 2546819,
+        "spy": {
+          "strength": 143667167,
+          "defense": 348670124,
+          "speed": 157933980,
+          "dexterity": 151358449,
+          "total": 801629720,
+          "timestamp": 1740714693
+        },
+        "personalstats": {
+          "Xanax Taken": 1924,
+          "Stat Enhancers Used": 0,
+          "Networth": 7699528787,
+          "timestamp": 1740579792
+        }
+      },
+      "2585727": {
+        "name": "mister_tibbs",
+        "level": 80,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755777,
+          "relative": "14 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 31 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2515770\">Ypso</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765768
+        },
+        "position": "Soldier",
+        "id": 2585727,
+        "personalstats": {
+          "Xanax Taken": 77,
+          "Stat Enhancers Used": 0,
+          "Networth": 18429045404,
+          "timestamp": 1740426396
+        }
+      },
+      "2605468": {
+        "name": "thisisjad",
+        "level": 55,
+        "days_in_faction": 242,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755709,
+          "relative": "15 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Jnr NCO",
+        "id": 2605468,
+        "spy": {
+          "strength": 3169716,
+          "defense": 1750867,
+          "speed": 1559796,
+          "dexterity": 10008380,
+          "total": 16488759,
+          "timestamp": 1740716239
+        },
+        "personalstats": {
+          "Xanax Taken": 578,
+          "Stat Enhancers Used": 0,
+          "Networth": 5072513117,
+          "timestamp": 1740753541
+        }
+      },
+      "2614806": {
+        "name": "Faulty_Soul",
+        "level": 30,
+        "days_in_faction": 3,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751715,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 3 hrs 0 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740767489
+        },
+        "position": "Soldier",
+        "id": 2614806,
+        "personalstats": {
+          "Xanax Taken": 291,
+          "Stat Enhancers Used": 0,
+          "Networth": 625150012,
+          "timestamp": 1740751095
+        }
+      },
+      "2650241": {
+        "name": "Braxion",
+        "level": 28,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756128,
+          "relative": "8 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 52 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740763412
+        },
+        "position": "Soldier",
+        "id": 2650241,
+        "spy": {
+          "strength": 200767,
+          "defense": 94527,
+          "speed": 1751438,
+          "dexterity": 1757097,
+          "total": 3803829,
+          "timestamp": 1740715703
+        },
+        "personalstats": {
+          "Xanax Taken": 220,
+          "Stat Enhancers Used": 0,
+          "Networth": 1529851876,
+          "timestamp": 1740579793
+        }
+      },
+      "2661370": {
+        "name": "TheBluffBoy",
+        "level": 92,
+        "days_in_faction": 242,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756169,
+          "relative": "8 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Captain",
+        "id": 2661370,
+        "spy": {
+          "strength": 552021254,
+          "defense": 364670582,
+          "speed": 352464001,
+          "dexterity": 524234186,
+          "total": 1793390023,
+          "timestamp": 1740715094
+        },
+        "personalstats": {
+          "Xanax Taken": 2604,
+          "Stat Enhancers Used": 0,
+          "Networth": 9329899403,
+          "timestamp": 1740750151
+        }
+      },
+      "2680294": {
+        "name": "Retsgnag",
+        "level": 98,
+        "days_in_faction": 6,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754497,
+          "relative": "36 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2680294,
+        "spy": {
+          "strength": 1102529964,
+          "defense": 736926295,
+          "speed": 905390188,
+          "dexterity": 858600822,
+          "total": 3603447269,
+          "timestamp": 1740715369
+        },
+        "personalstats": {
+          "Xanax Taken": 3388,
+          "Stat Enhancers Used": 0,
+          "Networth": 18545106598,
+          "timestamp": 1740754037
+        }
+      },
+      "2710442": {
+        "name": "AndreSTimon",
+        "level": 78,
+        "days_in_faction": 108,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752153,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 15 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=889354\">Steven</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740764769
+        },
+        "position": "Soldier",
+        "id": 2710442,
+        "spy": {
+          "strength": 221875103,
+          "defense": 66247428,
+          "speed": 191855387,
+          "dexterity": 82077514,
+          "total": 562055432,
+          "timestamp": 1740715919
+        },
+        "personalstats": {
+          "Xanax Taken": 1214,
+          "Stat Enhancers Used": 0,
+          "Networth": 4625129941,
+          "timestamp": 1740579794
+        }
+      },
+      "2764247": {
+        "name": "Trisity",
+        "level": 68,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740724986,
+          "relative": "8 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 6 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2536273\">deadalus29</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760661
+        },
+        "position": "Soldier",
+        "id": 2764247,
+        "personalstats": {
+          "Xanax Taken": 1042,
+          "Stat Enhancers Used": 0,
+          "Networth": 1326597885,
+          "timestamp": 1740579795
+        }
+      },
+      "2768026": {
+        "name": "i4_barbarian_X",
+        "level": 71,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753223,
+          "relative": "57 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 28 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2170094\">P00CH</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740765550
+        },
+        "position": "Soldier",
+        "id": 2768026,
+        "spy": {
+          "strength": 24880086,
+          "defense": 30049960,
+          "speed": 25044981,
+          "dexterity": 511553,
+          "total": 80486580,
+          "timestamp": 1740723806
+        },
+        "personalstats": {
+          "Xanax Taken": 1243,
+          "Stat Enhancers Used": 0,
+          "Networth": 2564587382,
+          "timestamp": 1740654742
+        }
+      },
+      "2795247": {
+        "name": "KanPowers",
+        "level": 35,
+        "days_in_faction": 193,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756632,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 4 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740760529
+        },
+        "position": "Juggernaut",
+        "id": 2795247,
+        "spy": {
+          "strength": 3802549,
+          "defense": 7180165,
+          "speed": 1213208,
+          "dexterity": 1027320,
+          "total": 13223242,
+          "timestamp": 1740719036
+        },
+        "personalstats": {
+          "Xanax Taken": 1001,
+          "Stat Enhancers Used": 0,
+          "Networth": 1319924656,
+          "timestamp": 1740690396
+        }
+      },
+      "2800836": {
+        "name": "Airport-Hobo",
+        "level": 15,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756519,
+          "relative": "2 minutes ago"
+        },
+        "status": {
+          "description": "Traveling to Hawaii",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2800836,
+        "personalstats": {
+          "Xanax Taken": 74,
+          "Stat Enhancers Used": 0,
+          "Networth": 329340059,
+          "timestamp": 1740579796
+        }
+      },
+      "2804718": {
+        "name": "wajcha",
+        "level": 77,
+        "days_in_faction": 241,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740745655,
+          "relative": "3 hours ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Captain",
+        "id": 2804718,
+        "spy": {
+          "strength": 100043331,
+          "defense": 100536466,
+          "speed": 94567804,
+          "dexterity": 100769490,
+          "total": 395917091,
+          "timestamp": 1740718574
+        },
+        "personalstats": {
+          "Xanax Taken": 1745,
+          "Stat Enhancers Used": 0,
+          "Networth": 5479018522,
+          "timestamp": 1740579798
+        }
+      },
+      "2965664": {
+        "name": "Tairys",
+        "level": 77,
+        "days_in_faction": 242,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756096,
+          "relative": "9 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Juggernaut",
+        "id": 2965664,
+        "spy": {
+          "strength": 58537947,
+          "defense": 25123416,
+          "speed": 16487950,
+          "dexterity": 10004088,
+          "total": 110153401,
+          "timestamp": 1740719057
+        },
+        "personalstats": {
+          "Xanax Taken": 1346,
+          "Stat Enhancers Used": 0,
+          "Networth": 4939693610,
+          "timestamp": 1740697551
+        }
+      },
+      "2971077": {
+        "name": "VeXxGamer",
+        "level": 53,
+        "days_in_faction": 214,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740733872,
+          "relative": "6 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 15 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740761214
+        },
+        "position": "Soldier",
+        "id": 2971077,
+        "spy": {
+          "strength": 2507940,
+          "defense": 1504748,
+          "speed": 1902616,
+          "dexterity": 2002977,
+          "total": 7918281,
+          "timestamp": 1740720008
+        },
+        "personalstats": {
+          "Xanax Taken": 584,
+          "Stat Enhancers Used": 0,
+          "Networth": 1443299742,
+          "timestamp": 1740579802
+        }
+      },
+      "2986646": {
+        "name": "Nobodys",
+        "level": 48,
+        "days_in_faction": 241,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740752945,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 2986646,
+        "spy": {
+          "strength": 8085499,
+          "defense": 1013170,
+          "speed": 270381,
+          "dexterity": 44530,
+          "total": 9413580,
+          "timestamp": 1730870208
+        },
+        "personalstats": {
+          "Xanax Taken": 413,
+          "Stat Enhancers Used": 0,
+          "Networth": 9677500028,
+          "timestamp": 1740697551
+        }
+      },
+      "2991296": {
+        "name": "Ac3dia",
+        "level": 45,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756419,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Juggernaut",
+        "id": 2991296,
+        "spy": {
+          "strength": 620132,
+          "defense": 101001,
+          "speed": 796080,
+          "dexterity": 1065826,
+          "total": 2583039,
+          "timestamp": 1740719327
+        },
+        "personalstats": {
+          "Xanax Taken": 452,
+          "Stat Enhancers Used": 0,
+          "Networth": 3006919377,
+          "timestamp": 1740579799
+        }
+      },
+      "2992584": {
+        "name": "MrVigerous",
+        "level": 66,
+        "days_in_faction": 242,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756234,
+          "relative": "7 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Leadership",
+        "id": 2992584,
+        "spy": {
+          "strength": 11829466,
+          "defense": 2484478,
+          "speed": 1531140,
+          "dexterity": 1335557,
+          "total": 17180641,
+          "timestamp": 1740719988
+        },
+        "personalstats": {
+          "Xanax Taken": 1091,
+          "Stat Enhancers Used": 0,
+          "Networth": 29731063891,
+          "timestamp": 1740752361
+        }
+      },
+      "3011879": {
+        "name": "_Blackgod_",
+        "level": 20,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753976,
+          "relative": "44 minutes ago"
+        },
+        "status": {
+          "description": "Traveling to South Africa",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3011879,
+        "personalstats": {
+          "Xanax Taken": 287,
+          "Stat Enhancers Used": 0,
+          "Networth": 119195173,
+          "timestamp": 1740525471
+        }
+      },
+      "3013065": {
+        "name": "DevonteJones",
+        "level": 37,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753149,
+          "relative": "58 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 46 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2536273\">deadalus29</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759458
+        },
+        "position": "Jnr NCO",
+        "id": 3013065,
+        "spy": {
+          "strength": 337091,
+          "defense": 295026,
+          "speed": 289807,
+          "dexterity": 337607,
+          "total": 1259531,
+          "timestamp": 1740721850
+        },
+        "personalstats": {
+          "Xanax Taken": 335,
+          "Stat Enhancers Used": 0,
+          "Networth": 708529923,
+          "timestamp": 1740579808
+        }
+      },
+      "3042784": {
+        "name": "Aullstar",
+        "level": 43,
+        "days_in_faction": 241,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740667399,
+          "relative": "1 day ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 7 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740764285
+        },
+        "position": "Jnr NCO",
+        "id": 3042784,
+        "spy": {
+          "strength": 1631272,
+          "defense": 1581652,
+          "speed": 1657210,
+          "dexterity": 1455781,
+          "total": 6325915,
+          "timestamp": 1740719569
+        },
+        "personalstats": {
+          "Xanax Taken": 539,
+          "Stat Enhancers Used": 0,
+          "Networth": 186651035,
+          "timestamp": 1740579800
+        }
+      },
+      "3134007": {
+        "name": "Applauded",
+        "level": 27,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740725194,
+          "relative": "8 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 44 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762902
+        },
+        "position": "Jnr NCO",
+        "id": 3134007,
+        "spy": {
+          "strength": 500512,
+          "defense": 386010,
+          "speed": 350630,
+          "dexterity": 575327,
+          "total": 1812479,
+          "timestamp": 1740720123
+        },
+        "personalstats": {
+          "Xanax Taken": 582,
+          "Stat Enhancers Used": 0,
+          "Networth": 2243821521,
+          "timestamp": 1740579803
+        }
+      },
+      "3155411": {
+        "name": "Artiel",
+        "level": 25,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756557,
+          "relative": "1 minute ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3155411,
+        "spy": {
+          "strength": 93965,
+          "defense": 70699,
+          "speed": 71278,
+          "dexterity": 101848,
+          "total": 337790,
+          "timestamp": 1740720436
+        },
+        "personalstats": {
+          "Xanax Taken": 210,
+          "Stat Enhancers Used": 0,
+          "Networth": 1263824764,
+          "timestamp": 1740579803
+        }
+      },
+      "3166384": {
+        "name": "Baap",
+        "level": 31,
+        "days_in_faction": 208,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740740710,
+          "relative": "4 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 2 hrs 1 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740763967
+        },
+        "position": "Jnr NCO",
+        "id": 3166384,
+        "spy": {
+          "strength": 966769,
+          "defense": 2118822,
+          "speed": 762247,
+          "dexterity": 630135,
+          "total": 4477973,
+          "timestamp": 1740721008
+        },
+        "personalstats": {
+          "Xanax Taken": 839,
+          "Stat Enhancers Used": 0,
+          "Networth": 4094360867,
+          "timestamp": 1740579806
+        }
+      },
+      "3224197": {
+        "name": "MrBearodactyl",
+        "level": 25,
+        "days_in_faction": 358,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756595,
+          "relative": "1 minute ago"
+        },
+        "status": {
+          "description": "In hospital for 38 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758966
+        },
+        "position": "Jnr NCO",
+        "id": 3224197,
+        "spy": {
+          "strength": 1531150,
+          "defense": 1519829,
+          "speed": 1115259,
+          "dexterity": 1256044,
+          "total": 5422282,
+          "timestamp": 1740720721
+        },
+        "personalstats": {
+          "Xanax Taken": 664,
+          "Stat Enhancers Used": 0,
+          "Networth": 1868558851,
+          "timestamp": 1740655333
+        }
+      },
+      "3232053": {
+        "name": "Egsy",
+        "level": 55,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756603,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Juggernaut",
+        "id": 3232053,
+        "spy": {
+          "strength": 2551949,
+          "defense": 1622145,
+          "speed": 1012241,
+          "dexterity": 447053,
+          "total": 5633388,
+          "timestamp": 1740720825
+        },
+        "personalstats": {
+          "Xanax Taken": 634,
+          "Stat Enhancers Used": 0,
+          "Networth": 5413274894,
+          "timestamp": 1740579804
+        }
+      },
+      "3245989": {
+        "name": "ClockworkCox",
+        "level": 29,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756587,
+          "relative": "1 minute ago"
+        },
+        "status": {
+          "description": "In hospital for 35 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758801
+        },
+        "position": "Soldier",
+        "id": 3245989,
+        "spy": {
+          "strength": 193576,
+          "defense": 220396,
+          "speed": 28053,
+          "dexterity": 652,
+          "total": 442677,
+          "timestamp": 1740720937
+        },
+        "personalstats": {
+          "Xanax Taken": 259,
+          "Stat Enhancers Used": 0,
+          "Networth": 277453142,
+          "timestamp": 1740579805
+        }
+      },
+      "3262044": {
+        "name": "Jourten_",
+        "level": 17,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740751702,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "In hospital for 36 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740758824
+        },
+        "position": "Soldier",
+        "id": 3262044,
+        "personalstats": {
+          "Xanax Taken": 46,
+          "Stat Enhancers Used": 0,
+          "Networth": 132986932,
+          "timestamp": 1739473884
+        }
+      },
+      "3301685": {
+        "name": "GLAZ",
+        "level": 43,
+        "days_in_faction": 8,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754499,
+          "relative": "35 minutes ago"
+        },
+        "status": {
+          "description": "Traveling to South Africa",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3301685,
+        "personalstats": {
+          "Xanax Taken": 111,
+          "Stat Enhancers Used": 0,
+          "Networth": 553298514,
+          "timestamp": 1740746937
+        }
+      },
+      "3308220": {
+        "name": "AceTheOne",
+        "level": 26,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753125,
+          "relative": "58 minutes ago"
+        },
+        "status": {
+          "description": "Traveling to South Africa",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3308220,
+        "spy": {
+          "strength": 67197,
+          "defense": 67120,
+          "speed": 67575,
+          "dexterity": 67449,
+          "total": 269341,
+          "timestamp": 1740722600
+        },
+        "personalstats": {
+          "Xanax Taken": 194,
+          "Stat Enhancers Used": 0,
+          "Networth": 170727698,
+          "timestamp": 1740579809
+        }
+      },
+      "3364648": {
+        "name": "Aligatorh",
+        "level": 34,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756534,
+          "relative": "2 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3364648,
+        "spy": {
+          "strength": 636853,
+          "defense": 768691,
+          "speed": 422278,
+          "dexterity": 96,
+          "total": 1827918,
+          "timestamp": 1740722866
+        },
+        "personalstats": {
+          "Xanax Taken": 316,
+          "Stat Enhancers Used": 0,
+          "Networth": 312004173,
+          "timestamp": 1740666289
+        }
+      },
+      "3390859": {
+        "name": "JerryTheG",
+        "level": 32,
+        "days_in_faction": 144,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740753606,
+          "relative": "50 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Jnr NCO",
+        "id": 3390859,
+        "spy": {
+          "strength": 146923,
+          "defense": 156055,
+          "speed": 229266,
+          "dexterity": 274853,
+          "total": 807097,
+          "timestamp": 1740721989
+        },
+        "personalstats": {
+          "Xanax Taken": 256,
+          "Stat Enhancers Used": 0,
+          "Networth": 6098338945,
+          "timestamp": 1740579808
+        }
+      },
+      "3441214": {
+        "name": "NO_SURRENDER",
+        "level": 22,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740747441,
+          "relative": "2 hours ago"
+        },
+        "status": {
+          "description": "Traveling to South Africa",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3441214,
+        "spy": {
+          "strength": 35231,
+          "defense": 20859,
+          "speed": 51594,
+          "dexterity": 21111,
+          "total": 128795,
+          "timestamp": 1740722393
+        },
+        "personalstats": {
+          "Xanax Taken": 133,
+          "Stat Enhancers Used": 0,
+          "Networth": 572171074,
+          "timestamp": 1740579809
+        }
+      },
+      "3444967": {
+        "name": "Jobbert",
+        "level": 25,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740735978,
+          "relative": "5 hours ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3444967,
+        "personalstats": {
+          "Xanax Taken": 69,
+          "Stat Enhancers Used": 0,
+          "Networth": 166804327,
+          "timestamp": 1739473573
+        }
+      },
+      "3497772": {
+        "name": "donfanfan",
+        "level": 26,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740745624,
+          "relative": "3 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 1 hrs 43 mins ",
+          "details": "Hospitalized by <a href = \"http://www.torn.com/profiles.php?XID=2033881\">_WOODY_</a>",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740762880
+        },
+        "position": "Soldier",
+        "id": 3497772,
+        "spy": {
+          "strength": 58933,
+          "defense": 56244,
+          "speed": 51292,
+          "dexterity": 48237,
+          "total": 214706,
+          "timestamp": 1740723148
+        },
+        "personalstats": {
+          "Xanax Taken": 73,
+          "Stat Enhancers Used": 0,
+          "Networth": 821718632,
+          "timestamp": 1740579811
+        }
+      },
+      "3499043": {
+        "name": "Casia",
+        "level": 25,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740742358,
+          "relative": "3 hours ago"
+        },
+        "status": {
+          "description": "In South Africa",
+          "details": "",
+          "state": "Abroad",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3499043,
+        "personalstats": {
+          "Xanax Taken": 30,
+          "Stat Enhancers Used": 0,
+          "Networth": 191767289,
+          "timestamp": 1740751422
+        }
+      },
+      "3506351": {
+        "name": "SassyCIassy",
+        "level": 24,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756452,
+          "relative": "3 minutes ago"
+        },
+        "status": {
+          "description": "Traveling to Hawaii",
+          "details": "",
+          "state": "Traveling",
+          "color": "blue",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3506351,
+        "personalstats": {
+          "Xanax Taken": 12,
+          "Stat Enhancers Used": 0,
+          "Networth": 194274946,
+          "timestamp": 1740329640
+        }
+      },
+      "3535655": {
+        "name": "Calinden",
+        "level": 16,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740756525,
+          "relative": "2 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 51 hrs 50 mins ",
+          "details": "Overdosed on Xanax",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740943273
+        },
+        "position": "Soldier",
+        "id": 3535655,
+        "personalstats": {
+          "Xanax Taken": 18,
+          "Stat Enhancers Used": 0,
+          "Networth": 811230151,
+          "timestamp": 1739475156
+        }
+      },
+      "3542421": {
+        "name": "I_Am_Nietzche",
+        "level": 15,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740717635,
+          "relative": "10 hours ago"
+        },
+        "status": {
+          "description": "In hospital for 41 mins ",
+          "details": "Hospitalized by someone",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759170
+        },
+        "position": "Soldier",
+        "id": 3542421,
+        "personalstats": {
+          "Xanax Taken": 15,
+          "Stat Enhancers Used": 0,
+          "Networth": 15922110,
+          "timestamp": 1739519518
+        }
+      },
+      "3546404": {
+        "name": "UltimaLight",
+        "level": 14,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740754786,
+          "relative": "31 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3546404,
+        "personalstats": {
+          "Xanax Taken": 0,
+          "Stat Enhancers Used": 0,
+          "Networth": 14200595,
+          "timestamp": 1739473632
+        }
+      },
+      "3549809": {
+        "name": "Wellsy31",
+        "level": 14,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740756025,
+          "relative": "10 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 55 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759972
+        },
+        "position": "Soldier",
+        "id": 3549809,
+        "personalstats": {
+          "Xanax Taken": 7,
+          "Stat Enhancers Used": 0,
+          "Networth": 55040944,
+          "timestamp": 1739473713
+        }
+      },
+      "3552695": {
+        "name": "Miggz_E",
+        "level": 10,
+        "days_in_faction": 9,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740463340,
+          "relative": "3 days ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3552695,
+        "personalstats": {
+          "Xanax Taken": 11,
+          "Stat Enhancers Used": 0,
+          "Networth": 4739018,
+          "timestamp": 1740343382
+        }
+      },
+      "3567351": {
+        "name": "Quintonius-",
+        "level": 18,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Idle",
+          "timestamp": 1740752687,
+          "relative": "1 hour ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3567351,
+        "personalstats": {
+          "Xanax Taken": 47,
+          "Stat Enhancers Used": 0,
+          "Networth": 724857341,
+          "timestamp": 1740712381
+        }
+      },
+      "3579284": {
+        "name": "Clarky16",
+        "level": 13,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Offline",
+          "timestamp": 1740755484,
+          "relative": "19 minutes ago"
+        },
+        "status": {
+          "description": "Okay",
+          "details": "",
+          "state": "Okay",
+          "color": "green",
+          "until": 0
+        },
+        "position": "Soldier",
+        "id": 3579284,
+        "personalstats": {
+          "Xanax Taken": 0,
+          "Stat Enhancers Used": 0,
+          "Networth": 446209486,
+          "timestamp": 1740352095
+        }
+      },
+      "3600713": {
+        "name": "Hansef",
+        "level": 9,
+        "days_in_faction": 10,
+        "last_action": {
+          "status": "Online",
+          "timestamp": 1740756623,
+          "relative": "0 minutes ago"
+        },
+        "status": {
+          "description": "In hospital for 50 mins ",
+          "details": "Severe emesis following Ipecac Syrup ingestion",
+          "state": "Hospital",
+          "color": "red",
+          "until": 1740759686
+        },
+        "position": "Soldier",
+        "id": 3600713,
+        "personalstats": {
+          "Xanax Taken": 5,
+          "Stat Enhancers Used": 0,
+          "Networth": 110839919,
+          "timestamp": 1740693230
+        }
+      }
+    },
+    "peace": { "47835": 1752268136 },
+    "chain": {
+      "current": 156,
+      "max": 250,
+      "timeout": 216,
+      "modifier": 1.3,
+      "cooldown": 0,
+      "start": 1740751201,
+      "end": 1740756874
+    },
+    "spies": [
+      3042954931, 1107209131, 4766896965, 7061359231, 18341564778, 7503143,
+      3444355707, 12145015871, 1008807838, 2131782032, 41147786, 242825660,
+      7395372326, 3008922331, 2581374, 577989, 184203626, 19609017, 34910113,
+      1475020, 801629720, 16488759, 3803829, 1793390023, 3603447269, 562055432,
+      80486580, 13223242, 395917091, 110153401, 7918281, 9413580, 2583039,
+      17180641, 1259531, 6325915, 1812479, 337790, 4477973, 5422282, 5633388,
+      442677, 269341, 1827918, 807097, 128795, 214706
+    ]
+  }
+}
