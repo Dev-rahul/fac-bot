@@ -657,9 +657,6 @@ async function clearAllMessages(channel: TextChannel, deleteAllMessages = false)
     }
 }
 
-// Start the bot
-client.login(BOT_TOKEN);
-
 // Type definitions
 interface Faction {
     id: number;
@@ -705,4 +702,16 @@ interface Player {
     is_on_wall: boolean;
     is_in_oc: boolean;
     has_early_discharge: boolean;
+}
+
+// Add this export function at the end of your file
+export async function startBot() {
+  try {
+    await client.login(BOT_TOKEN);
+    console.log("Bot started successfully");
+    return client;
+  } catch (error) {
+    console.error("Failed to start bot:", error);
+    throw error;
+  }
 }
