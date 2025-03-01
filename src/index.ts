@@ -1,21 +1,21 @@
-import { Client, Events, GatewayIntentBits, TextChannel, ActionRowBuilder, ButtonBuilder, ButtonStyle, Message, EmbedBuilder } from "discord.js";
+import { Client, Events, GatewayIntentBits, TextChannel, ActionRowBuilder, ButtonBuilder, ButtonStyle, 
+         Message, EmbedBuilder, ButtonInteraction, Collection, Interaction, MessageFlags } from "discord.js";
 
 // Configuration constants
-const DEFAULT_CHECK_INTERVAL = 20_000; // 20-second interval default
-const MY_FACTION_ID = 41702; // Faction ID
+const DEFAULT_CHECK_INTERVAL = 20_000;
+const MY_FACTION_ID = 41702;
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN!;
-const API_KEY = process.env.TORN_API_KEY; // API Key for authentication
-const CHANNEL_ID = "1345081433139712051"; // Discord channel where messages will be sent
+const API_KEY = process.env.TORN_API_KEY;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 const WAR_STATUS_URL = `https://api.torn.com/v2/faction/${MY_FACTION_ID}/wars`;
-
-const PREFIX = "!"; // Command prefix
+const PREFIX = "!";
 
 // Track monitoring state
 interface MonitoringConfig {
     isActive: boolean;
     intervalId: NodeJS.Timeout | null;
-    maxHospitalTime: number; // Maximum time in hospital to display (seconds)
-    checkInterval: number; // How often to check (milliseconds)
+    maxHospitalTime: number;
+    checkInterval: number;
     opponentFactionId: number | null;
 }
 
@@ -28,15 +28,13 @@ const monitoringConfig: MonitoringConfig = {
     opponentFactionId: null
 };
 
-// Store player messages to track updates (use weak map to allow garbage collection)
-const playerMessages = new Map<number, string>();
-// Store header and footer message IDs
+// Message tracking maps
+const playerMessages = new Map<number, {messageId: string, state: string}>(); // Track player state
+const dibsRegistry = new Map<number, { userId: string, username: string, timestamp: number }>();
+
+// Header tracking
 let headerMessageId: string | null = null;
 let footerMessageId: string | null = null;
-// Store IDs for section headers and available target messages
-let hospitalSectionId: string | null = null;
-let availableSectionId: string | null = null;
-const availableTargetMessages = new Set<string>();
 
 // Initialize Discord client
 const client = new Client({
@@ -47,78 +45,91 @@ const client = new Client({
   ],
 });
 
-// Client ready event handler
 client.once(Events.ClientReady, async () => {
   console.log(`Logged in as ${client.user?.tag}`);
-  // Don't auto-start monitoring, wait for command
 });
 
-// Message handler for commands
+// Message handler with channel restriction
 client.on(Events.MessageCreate, async (message) => {
-    // Ignore messages from bots or messages without the prefix
     if (message.author.bot || !message.content.startsWith(PREFIX)) return;
+    if (message.channelId !== CHANNEL_ID) return;
     
-    // Process the command
     const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
     const command = args.shift()?.toLowerCase();
     
     if (command === "monitor") {
-        // !monitor start [maxTime] [interval] [factionId]
-        // !monitor stop
-        // !monitor status
-        
         const action = args[0]?.toLowerCase();
         
-        if (action === "start") {
-            // Parse optional parameters
-            const maxTime = parseInt(args[1]) || 5; // Default 5 minutes  
-            const interval = parseInt(args[2]) || 20; // Default 20 seconds
-            const factionId = parseInt(args[3]) || null; // Optional faction ID
-            
-            await startMonitoringCommand(message, maxTime, interval, factionId);
-        } 
-        else if (action === "stop") {
-            await stopMonitoring(message);
-        }
-        else if (action === "status") {
-            await showStatus(message);
-        }
-        else if (action === "clear") {
-            const channel = message.channel as TextChannel;
-            // Send the message before deleting everything
-            await channel.send("Clearing all messages in the channel...");
-            await clearAllMessages(channel, true); // Pass true to delete ALL messages
-            // Send a new message after clearing since the original message is gone
-            await channel.send("Channel cleared of all messages.");
-        }
-        else {
-            await message.reply(
-                "Usage:\n" +
-                "`!monitor start [maxTime] [interval] [factionId]` - Start monitoring\n" +
-                "  - maxTime: Maximum hospital time in minutes (default: 5)\n" +
-                "  - interval: Check interval in seconds (default: 20)\n" +
-                "  - factionId: Optional opponent faction ID (default: auto-detect from RW)\n" +
-                "`!monitor stop` - Stop monitoring\n" +
-                "`!monitor status` - Show monitoring status\n" +
-                "`!monitor clear` - Clear all messages in channel"
-            );
+        switch(action) {
+            case "start":
+                const maxTime = parseInt(args[1]) || 5;
+                const interval = parseInt(args[2]) || 20;
+                const factionId = parseInt(args[3]) || null;
+                await startMonitoringCommand(message, maxTime, interval, factionId);
+                break;
+                
+            case "stop":
+                await stopMonitoring(message);
+                break;
+                
+            case "status":
+                await showStatus(message);
+                break;
+                
+            case "clear":
+                const channel = message.channel as TextChannel;
+                await channel.send("Clearing all messages in the channel...");
+                await clearAllMessages(channel, true);
+                await channel.send("Channel cleared of all messages.");
+                break;
+                
+            case "dibs":
+                await showDibsList(message);
+                break;
+                
+            default:
+                await message.reply(
+                    "Usage:\n" +
+                    "`!monitor start [maxTime] [interval] [factionId]` - Start monitoring\n" +
+                    "  - maxTime: Maximum hospital time in minutes (default: 5)\n" +
+                    "  - interval: Check interval in seconds (default: 20)\n" +
+                    "  - factionId: Optional opponent faction ID (default: auto-detect from RW)\n" +
+                    "`!monitor stop` - Stop monitoring\n" +
+                    "`!monitor status` - Show monitoring status\n" +
+                    "`!monitor clear` - Clear all messages in channel\n" +
+                    "`!monitor dibs` - Show current target claims"
+                );
         }
     }
 });
 
-// Commands implementation
+// Handle button interactions
+client.on(Events.InteractionCreate, async (interaction) => {
+    if (!interaction.isButton()) return;
+    if (interaction.channelId !== CHANNEL_ID) {
+        await interaction.reply({ 
+            content: "Button interactions can only be used in the designated channel.", 
+            flags: MessageFlags.Ephemeral 
+        });
+        return;
+    }
+    
+    const customId = interaction.customId;
+    if (customId.startsWith('dibs_')) {
+        await handleDibsButton(interaction);
+    }
+});
+
+// Command implementations
 async function startMonitoringCommand(message: Message, maxTime: number, interval: number, factionId: number | null) {
     try {
-        // Stop any existing monitoring
         if (monitoringConfig.isActive) {
             stopMonitoringInterval();
         }
         
-        // Update config with new parameters
-        monitoringConfig.maxHospitalTime = maxTime * 60; // Convert to seconds
-        monitoringConfig.checkInterval = interval * 1000; // Convert to milliseconds
+        monitoringConfig.maxHospitalTime = maxTime * 60;
+        monitoringConfig.checkInterval = interval * 1000;
         
-        // If faction ID is provided, use it
         if (factionId) {
             monitoringConfig.opponentFactionId = factionId;
             await message.reply(`Starting monitoring of faction ID: ${factionId} (Custom)`);
@@ -126,7 +137,6 @@ async function startMonitoringCommand(message: Message, maxTime: number, interva
             return;
         }
         
-        // Otherwise, try to auto-detect from ranked war
         const hasRW = await checkForActiveRW();
         
         if (!hasRW) {
@@ -146,7 +156,6 @@ async function stopMonitoring(message: Message) {
             stopMonitoringInterval();
             await message.reply("Monitoring stopped.");
             
-            // Clean up the channel of existing messages
             const channel = message.channel as TextChannel;
             await cleanupChannel(channel);
         } else {
@@ -165,84 +174,45 @@ function stopMonitoringInterval() {
     }
     monitoringConfig.isActive = false;
     
-    // Clear cached message IDs to prevent memory leaks
+    // Clear tracking data
     playerMessages.clear();
     headerMessageId = null;
     footerMessageId = null;
-    hospitalSectionId = null;
-    availableSectionId = null;
-    availableTargetMessages.clear();
 }
 
 async function cleanupChannel(channel: TextChannel) {
-    // Clean up only the bot's monitoring messages, not all messages
     try {
+        // Delete all messages tracked by the bot
+        const deletionPromises = [];
+        
         if (headerMessageId) {
-            try {
-                const headerMessage = await channel.messages.fetch(headerMessageId);
-                await headerMessage.delete();
-            } catch (error) {
-                console.error("Error deleting header message:", error);
-            }
+            deletionPromises.push(channel.messages.fetch(headerMessageId)
+                .then(msg => msg.delete())
+                .catch(err => console.error("Error deleting header message:", err)));
+            headerMessageId = null;
         }
         
         if (footerMessageId) {
-            try {
-                const footerMessage = await channel.messages.fetch(footerMessageId);
-                await footerMessage.delete();
-            } catch (error) {
-                console.error("Error deleting footer message:", error);
-            }
+            deletionPromises.push(channel.messages.fetch(footerMessageId)
+                .then(msg => msg.delete())
+                .catch(err => console.error("Error deleting footer message:", err)));
+            footerMessageId = null;
         }
         
-        if (hospitalSectionId) {
-            try {
-                const hospitalHeader = await channel.messages.fetch(hospitalSectionId);
-                await hospitalHeader.delete();
-            } catch (error) {
-                console.error("Error deleting hospital section header:", error);
-            }
+        // Delete all player messages
+        for (const playerData of playerMessages.values()) {
+            deletionPromises.push(channel.messages.fetch(playerData.messageId)
+                .then(msg => msg.delete())
+                .catch(err => console.error(`Error deleting player message:`, err)));
         }
         
-        if (availableSectionId) {
-            try {
-                const availableHeader = await channel.messages.fetch(availableSectionId);
-                await availableHeader.delete();
-            } catch (error) {
-                console.error("Error deleting available section header:", error);
-            }
-        }
+        // Wait for all deletions to complete
+        await Promise.allSettled(deletionPromises);
+        playerMessages.clear();
         
-        // Delete player messages
-        for (const messageId of playerMessages.values()) {
-            try {
-                const message = await channel.messages.fetch(messageId);
-                await message.delete();
-            } catch (error) {
-                console.error("Error deleting player message:", error);
-            }
-        }
-        
-        // Delete available target messages
-        for (const messageId of availableTargetMessages) {
-            try {
-                const message = await channel.messages.fetch(messageId);
-                await message.delete();
-            } catch (error) {
-                console.error("Error deleting available target message:", error);
-            }
-        }
     } catch (error) {
         console.error("Error cleaning up channel:", error);
     }
-    
-    // Reset all message tracking
-    playerMessages.clear();
-    headerMessageId = null;
-    footerMessageId = null;
-    hospitalSectionId = null;
-    availableSectionId = null;
-    availableTargetMessages.clear();
 }
 
 async function showStatus(message: Message) {
@@ -259,20 +229,6 @@ async function showStatus(message: Message) {
 }
 
 // Data fetching functions
-async function fetchFactionData() {
-  try {
-    const response = await fetch(WAR_STATUS_URL, {
-      headers: { Authorization: `ApiKey ${API_KEY}` },
-    });
-
-    const data = await response.json();
-    return data.members || [];
-  } catch (error) {
-    console.error("Error fetching faction data:", error);
-    return [];
-  }
-}
-
 const checkForActiveRW = async (): Promise<boolean> => { 
     try {
         const response = await fetch(WAR_STATUS_URL, {
@@ -281,26 +237,21 @@ const checkForActiveRW = async (): Promise<boolean> => {
 
         const data = await response.json();
 
-        // Check if there is an active ranked war
         if (data.wars?.ranked && !data.wars.ranked.end) {
             console.log("There is an active ranked war");
 
-            // Find the opponent faction's ID
             const factions = data.wars.ranked.factions;
             const opponentFaction: Faction | undefined = factions.find((faction: Faction) => faction.id !== MY_FACTION_ID);
 
             if (opponentFaction) {
                 console.log(`Opponent Faction ID: ${opponentFaction.id}`);
                 monitoringConfig.opponentFactionId = opponentFaction.id;
-                startMonitoring(opponentFaction.id); // Pass opponent faction ID
+                startMonitoring(opponentFaction.id);
                 return true;
-            } else {
-                console.error("Opponent faction not found!");
-                return false;
             }
         }
 
-        return false; // No active ranked war
+        return false;
     } catch (error) {
         console.error("Error fetching faction war data:", error);
         return false;
@@ -310,20 +261,15 @@ const checkForActiveRW = async (): Promise<boolean> => {
 // Main monitoring function
 const startMonitoring = async (opponentFactionId: number) => {
     console.log(`Monitoring opponent faction: ${opponentFactionId}`);
-
-    // Use opponentFactionId in the API URL
     const API_URL = `https://api.torn.com/v2/faction/${opponentFactionId}/members?striptags=true`;
 
-    // Stop any existing interval
     if (monitoringConfig.intervalId) {
         clearInterval(monitoringConfig.intervalId);
     }
 
-    // Start new monitoring interval
     monitoringConfig.isActive = true;
     monitoringConfig.opponentFactionId = opponentFactionId;
     
-    // Optimized: Use async intervals to prevent overlapping executions
     const runMonitoringCycle = async () => {
         try {
             const response = await fetch(API_URL, {
@@ -333,164 +279,125 @@ const startMonitoring = async (opponentFactionId: number) => {
             const data = await response.json();
             const now = Math.floor(Date.now() / 1000);
 
-            // Filter and sort members in hospital who will leave within the configured time range
-            const soonToLeave = (Object.values(data.members) as Player[])
-                .filter((player: Player) => {
-                    return (
-                        player.status.state === "Hospital" &&
-                        player.status.until - now > 0 && // Just ensure they're still in hospital
-                        player.status.until - now <= monitoringConfig.maxHospitalTime
-                    );
-                })
-                .sort((a: Player, b: Player) => {
-                    // Sorting by time left in the hospital (ascending)
-                    return (a.status.until - now) - (b.status.until - now);
-                });
+            // Process all members first
+            const memberPromises = Object.values(data.members || {}).map(async (player: Player) => {
+                const isInHospital = player.status.state === "Hospital";
+                const hospitalTimeLeft = isInHospital ? player.status.until - now : 0;
+                const inTargetTimeRange = isInHospital && hospitalTimeLeft <= monitoringConfig.maxHospitalTime && hospitalTimeLeft > 0;
                 
-            // Find available targets (not in hospital)
-            const availableTargets = (Object.values(data.members) as Player[])
-                .filter((player: Player) => player.status.state !== "Hospital")
-                .sort((a: Player, b: Player) => a.level - b.level); // Sort by level (ascending)
-
-            const channel = (await client.channels.fetch(CHANNEL_ID)) as TextChannel;
-            
-            // Optimization: Track player messages to avoid redundant operations
-            const currentHospitalPlayers = new Set(soonToLeave.map(player => player.id));
-            
-            // Find players whose messages should be removed
-            const playersToRemove = [...playerMessages.keys()].filter(playerId => 
-                !currentHospitalPlayers.has(playerId)
-            );
-            
-            // Remove messages for players no longer in the target criteria
-            for (const playerId of playersToRemove) {
-                const messageId = playerMessages.get(playerId);
-                if (messageId) {
-                    try {
-                        const message = await channel.messages.fetch(messageId);
-                        await message.delete();
-                    } catch (error) {
-                        console.error(`Error deleting message for player ${playerId}:`, error);
+                // Get player's current tracked state
+                const currentTracking = playerMessages.get(player.id);
+                
+                // Determine if we need to update this player
+                let needsUpdate = false;
+                let needsDeletion = false;
+                
+                if (currentTracking) {
+                    // Cases when we need to update:
+                    // 1. Player was in hospital but now available
+                    // 2. Player was available but now in hospital within our time range
+                    // 3. Player still in hospital but time changed significantly
+                    if (currentTracking.state === 'hospital' && !inTargetTimeRange) {
+                        needsDeletion = true;
+                    } else if (currentTracking.state === 'available' && inTargetTimeRange) {
+                        needsUpdate = true;
+                    } else if (inTargetTimeRange) {
+                        needsUpdate = true;
                     }
-                    playerMessages.delete(playerId);
+                } else if (inTargetTimeRange || (!isInHospital && player.level <= 100)) {
+                    // New player that fits our criteria
+                    needsUpdate = true;
                 }
-            }
+                
+                return {
+                    player,
+                    needsUpdate,
+                    needsDeletion,
+                    isInHospital,
+                    inTargetTimeRange
+                };
+            });
+            
+            // Wait for all processing to complete
+            const processedMembers = await Promise.all(memberPromises);
+            
+            const channel = await client.channels.fetch(CHANNEL_ID) as TextChannel;
             
             // Create header if it doesn't exist
-            if (!headerMessageId) {
+            if (!headerMessageId && processedMembers.some(m => m.needsUpdate)) {
                 const headerMessage = await channel.send({ 
                     content: `━━━━━━━━━━━━━━ 🏥 **TARGET ALERTS** 🏥 ━━━━━━━━━━━━━━` 
                 });
                 headerMessageId = headerMessage.id;
             }
-
-            // Handle available targets section
-            // Optimization: Use a batch operation for deleting messages
-            const messagesToDelete = [...availableTargetMessages].map(id => 
-                channel.messages.fetch(id).then(msg => msg.delete())
-            );
-            await Promise.allSettled(messagesToDelete);
-            availableTargetMessages.clear();
             
-            if (availableTargets.length > 0) {
-                // Update available section header
-                if (availableSectionId) {
-                    try {
-                        await channel.messages.fetch(availableSectionId)
-                            .then(header => header.delete())
-                            .catch(() => console.error("Failed to delete available section header"));
-                    } catch (error) {
-                        console.error("Error with available section header:", error);
+            // Delete messages for players who no longer fit criteria
+            const deletionPromises = processedMembers
+                .filter(m => m.needsDeletion)
+                .map(async ({ player }) => {
+                    const tracking = playerMessages.get(player.id);
+                    if (tracking) {
+                        try {
+                            const message = await channel.messages.fetch(tracking.messageId);
+                            await message.delete();
+                        } catch (error) {
+                            console.error(`Error deleting message for player ${player.id}:`, error);
+                        }
+                        playerMessages.delete(player.id);
                     }
-                }
-                
-                const availableHeader = await channel.send({ content: `**🎯 Available targets right now:**` });
-                availableSectionId = availableHeader.id;
-                
-                // Limit to top 5 lowest level targets to avoid spam
-                const topTargets = availableTargets.slice(0, 5);
-                
-                // Optimization: Prepare all messages before sending to reduce API calls
-                const targetMessagePromises = topTargets.map(async (player) => {
-                    const healthPct = player.life ? 
-                        Math.floor((player.life.current/player.life.maximum)*100) : null;
-                    
-                    const attackButton = new ButtonBuilder()
-                        .setLabel("⚔️ Attack")
-                        .setStyle(ButtonStyle.Link)
-                        .setURL(`https://www.torn.com/loader.php?sid=attack&user2ID=${player.id}`);
-                        
-                    const profileButton = new ButtonBuilder()
-                        .setLabel("👤 Profile")
-                        .setStyle(ButtonStyle.Link)
-                        .setURL(`https://www.torn.com/profiles.php?XID=${player.id}`);
-
-                    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(attackButton, profileButton);
-
-                    const embed = new EmbedBuilder()
-                        .setColor('#00FF00')
-                        .setTitle(`${player.name} (Lvl ${player.level})`)
-                        .setDescription(
-                            `✅ **AVAILABLE NOW**\n` +
-                            `🏢 ${player.position} • 📅 ${player.days_in_faction}d in faction` +
-                            (healthPct ? ` • ❤️ ${healthPct}%` : '') +
-                            `\n⌚ ${player.last_action?.relative || 'Unknown'}`
-                        )
-                        .setFooter({ text: player.status?.description || '' });
-
-                    return { embeds: [embed], components: [row] };
                 });
                 
-                // Send all available target messages
-                const messageContents = await Promise.all(targetMessagePromises);
-                for (const content of messageContents) {
-                    const targetMessage = await channel.send(content);
-                    availableTargetMessages.add(targetMessage.id);
-                }
-            } else if (availableSectionId) {
-                try {
-                    await channel.messages.fetch(availableSectionId)
-                        .then(header => header.delete())
-                        .catch(() => {});
-                    availableSectionId = null;
-                } catch (error) {
-                    console.error("Error deleting available section header:", error);
-                    availableSectionId = null;
-                }
-            }
-
-            // Handle hospital section
-            if (soonToLeave.length > 0) {
-                if (!hospitalSectionId) {
-                    const hospitalHeader = await channel.send({ content: `\n**🏥 Players leaving hospital soon:**` });
-                    hospitalSectionId = hospitalHeader.id;
+            await Promise.allSettled(deletionPromises);
+            
+            // Update players who need it
+            for (const { player, needsUpdate, isInHospital, inTargetTimeRange } of processedMembers) {
+                if (!needsUpdate) continue;
+                
+                // Prepare embed and message content based on player state
+                const dibsClaimed = dibsRegistry.has(player.id);
+                const healthPct = player.life ? 
+                    Math.floor((player.life.current/player.life.maximum)*100) : null;
+                
+                // Create attack and profile buttons
+                const attackButton = new ButtonBuilder()
+                    .setLabel("⚔️ Attack")
+                    .setStyle(ButtonStyle.Link)
+                    .setURL(`https://www.torn.com/loader.php?sid=attack&user2ID=${player.id}`);
+                    
+                const profileButton = new ButtonBuilder()
+                    .setLabel("👤 Profile")
+                    .setStyle(ButtonStyle.Link)
+                    .setURL(`https://www.torn.com/profiles.php?XID=${player.id}`);
+                
+                // Create dibs button
+                const dibsButton = new ButtonBuilder()
+                    .setLabel(dibsClaimed ? "👑 Claimed" : "🎯 Dibs")
+                    .setStyle(dibsClaimed ? ButtonStyle.Success : ButtonStyle.Primary)
+                    .setCustomId(`dibs_${player.id}`);
+                
+                const row = new ActionRowBuilder<ButtonBuilder>()
+                    .addComponents(attackButton, profileButton, dibsButton);
+                
+                // Build dibs info if claimed
+                let dibsInfo = '';
+                if (dibsClaimed) {
+                    const claimer = dibsRegistry.get(player.id)!;
+                    dibsInfo = `\n👑 **Claimed by ${claimer.username}**`;
                 }
                 
-                // Prepare all hospital player embeds first
-                const playerUpdates = soonToLeave.map(async (player) => {
+                let embed: EmbedBuilder;
+                let currentState: string;
+                
+                if (inTargetTimeRange) {
+                    // Player in hospital within our time range
+                    currentState = 'hospital';
                     const secondsLeft = player.status.until - now;
                     const minutesLeft = Math.floor(secondsLeft / 60);
                     const remainingSeconds = secondsLeft % 60;
-                    
                     const countdownText = `${minutesLeft}m ${remainingSeconds}s`;
                     
-                    const healthPct = player.life ? 
-                        Math.floor((player.life.current/player.life.maximum)*100) : null;
-                    
-                    const attackButton = new ButtonBuilder()
-                        .setLabel("⚔️ Attack")
-                        .setStyle(ButtonStyle.Link)
-                        .setURL(`https://www.torn.com/loader.php?sid=attack&user2ID=${player.id}`);
-                        
-                    const profileButton = new ButtonBuilder()
-                        .setLabel("👤 Profile")
-                        .setStyle(ButtonStyle.Link)
-                        .setURL(`https://www.torn.com/profiles.php?XID=${player.id}`);
-
-                    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(attackButton, profileButton);
-
-                    const embed = new EmbedBuilder()
-                        .setColor('#FF4500')
+                    embed = new EmbedBuilder()
+                        .setColor(dibsClaimed ? '#FFD700' : '#FF4500') // Gold if claimed, orange if not
                         .setTitle(`${player.name} (Lvl ${player.level})`)
                         .setDescription(
                             `⏰ **Hospital Exit:** <t:${player.status.until}:R> (${countdownText})\n` +
@@ -498,61 +405,57 @@ const startMonitoring = async (opponentFactionId: number) => {
                             (healthPct ? ` • ❤️ ${healthPct}%` : '') + 
                             `\n⌚ ${player.last_action?.relative || 'Unknown'} • ` +
                             `${player.is_revivable ? '✅ Revivable' : '❌ Not revivable'}` +
-                            `${player.has_early_discharge ? ' • ⚡ Early discharge' : ''}`
+                            `${player.has_early_discharge ? ' • ⚡ Early discharge' : ''}` +
+                            dibsInfo
                         )
                         .setFooter({ text: player.status.description || '' });
-
-                    return {
-                        playerId: player.id,
-                        embed,
-                        row,
-                    };
-                });
-                
-                // Process all updates
-                const updates = await Promise.all(playerUpdates);
-                
-                // Apply updates optimally (update existing or create new)
-                for (const update of updates) {
-                    if (playerMessages.has(update.playerId)) {
-                        try {
-                            const messageId = playerMessages.get(update.playerId)!;
-                            const message = await channel.messages.fetch(messageId);
-                            
-                            await message.edit({
-                                embeds: [update.embed],
-                                components: [update.row]
-                            });
-                        } catch (error) {
-                            console.error(`Error updating message for player ${update.playerId}:`, error);
-                            const newMessage = await channel.send({
-                                embeds: [update.embed],
-                                components: [update.row]
-                            });
-                            playerMessages.set(update.playerId, newMessage.id);
-                        }
-                    } else {
-                        const newMessage = await channel.send({
-                            embeds: [update.embed],
-                            components: [update.row]
-                        });
-                        playerMessages.set(update.playerId, newMessage.id);
-                    }
+                } else {
+                    // Available player
+                    currentState = 'available';
+                    embed = new EmbedBuilder()
+                        .setColor(dibsClaimed ? '#FFD700' : '#00FF00') // Gold if claimed, green if not
+                        .setTitle(`${player.name} (Lvl ${player.level})`)
+                        .setDescription(
+                            `✅ **AVAILABLE NOW**\n` +
+                            `🏢 ${player.position} • 📅 ${player.days_in_faction}d in faction` +
+                            (healthPct ? ` • ❤️ ${healthPct}%` : '') +
+                            `\n⌚ ${player.last_action?.relative || 'Unknown'}` +
+                            dibsInfo
+                        )
+                        .setFooter({ text: player.status?.description || '' });
                 }
-            } else if (hospitalSectionId) {
-                try {
-                    await channel.messages.fetch(hospitalSectionId)
-                        .then(header => header.delete())
-                        .catch(() => {});
-                    hospitalSectionId = null;
-                } catch (error) {
-                    console.error("Error deleting hospital section header:", error);
-                    hospitalSectionId = null;
+                
+                // Update or create message
+                const tracking = playerMessages.get(player.id);
+                if (tracking) {
+                    try {
+                        const message = await channel.messages.fetch(tracking.messageId);
+                        await message.edit({
+                            embeds: [embed],
+                            components: [row]
+                        });
+                        playerMessages.set(player.id, { messageId: tracking.messageId, state: currentState });
+                    } catch (error) {
+                        console.error(`Error updating message for player ${player.id}:`, error);
+                        // If message can't be updated, create a new one
+                        const newMessage = await channel.send({
+                            embeds: [embed],
+                            components: [row]
+                        });
+                        playerMessages.set(player.id, { messageId: newMessage.id, state: currentState });
+                    }
+                } else {
+                    // Create a new message
+                    const newMessage = await channel.send({
+                        embeds: [embed],
+                        components: [row]
+                    });
+                    playerMessages.set(player.id, { messageId: newMessage.id, state: currentState });
                 }
             }
             
-            // Create or update footer
-            if (!footerMessageId) {
+            // Create or update footer if needed
+            if (!footerMessageId && playerMessages.size > 0) {
                 const footerMessage = await channel.send({
                     content: `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`
                 });
@@ -560,7 +463,7 @@ const startMonitoring = async (opponentFactionId: number) => {
             }
             
             // Clean up if there's nothing to show
-            if (soonToLeave.length === 0 && availableTargets.length === 0) {
+            if (playerMessages.size === 0) {
                 if (headerMessageId) {
                     try {
                         await channel.messages.fetch(headerMessageId)
@@ -568,7 +471,7 @@ const startMonitoring = async (opponentFactionId: number) => {
                             .catch(() => {});
                         headerMessageId = null;
                     } catch (error) {
-                        console.error("Error deleting header message:", error);
+                        headerMessageId = null;
                     }
                 }
                 
@@ -579,7 +482,7 @@ const startMonitoring = async (opponentFactionId: number) => {
                             .catch(() => {});
                         footerMessageId = null;
                     } catch (error) {
-                        console.error("Error deleting footer message:", error);
+                        footerMessageId = null;
                     }
                 }
             }
@@ -595,12 +498,147 @@ const startMonitoring = async (opponentFactionId: number) => {
     monitoringConfig.intervalId = setInterval(runMonitoringCycle, monitoringConfig.checkInterval) as NodeJS.Timeout;
 };
 
+// Handler function for dibs buttons
+async function handleDibsButton(interaction: ButtonInteraction) {
+    try {
+        const playerId = parseInt(interaction.customId.split('_')[1]);
+        const user = interaction.user;
+        let responseMessage = "";
+        
+        if (dibsRegistry.has(playerId)) {
+            const existingDibs = dibsRegistry.get(playerId)!;
+            
+            if (existingDibs.userId === user.id) {
+                dibsRegistry.delete(playerId);
+                responseMessage = `You've released your claim on this target`;
+            } else {
+                responseMessage = `Target already claimed by ${existingDibs.username}! Please choose another target.`;
+                await interaction.reply({ content: responseMessage, flags: MessageFlags.Ephemeral });
+                return;
+            }
+        } else {
+            dibsRegistry.set(playerId, {
+                userId: user.id,
+                username: user.username,
+                timestamp: Date.now()
+            });
+            responseMessage = `You've claimed this target! Good hunting!`;
+        }
+        
+        await interaction.reply({ content: responseMessage, flags: MessageFlags.Ephemeral });
+        
+        // Update the message
+        try {
+            const message = interaction.message;
+            if (!message) return;
+            
+            const channel = interaction.channel as TextChannel;
+            if (!channel) return;
+            
+            let msg;
+            try {
+                msg = await channel.messages.fetch(message.id);
+            } catch (err) {
+                return;
+            }
+            
+            const oldEmbed = msg.embeds[0];
+            if (!oldEmbed) return;
+            
+            const playerData = playerMessages.get(playerId);
+            if (!playerData) return;
+            
+            const isHospital = playerData.state === 'hospital';
+            const newEmbed = EmbedBuilder.from(oldEmbed);
+            
+            newEmbed.setColor(dibsRegistry.has(playerId) ? '#FFD700' : (isHospital ? '#FF4500' : '#00FF00'));
+            
+            let description = oldEmbed.description || '';
+            description = description.replace(/\n👑 \*\*Claimed by .*?\*\*/g, '');
+            
+            if (dibsRegistry.has(playerId)) {
+                const claimer = dibsRegistry.get(playerId)!;
+                description += `\n👑 **Claimed by ${claimer.username}**`;
+            }
+            
+            newEmbed.setDescription(description);
+            
+            try {
+                const components = message.components;
+                if (components && components.length > 0 && components[0].components.length > 2) {
+                    const attackButton = ButtonBuilder.from(components[0].components[0] as any);
+                    const profileButton = ButtonBuilder.from(components[0].components[1] as any);
+                    const dibsButton = new ButtonBuilder()
+                        .setLabel(dibsRegistry.has(playerId) ? "👑 Claimed" : "🎯 Dibs")
+                        .setStyle(dibsRegistry.has(playerId) ? ButtonStyle.Success : ButtonStyle.Primary)
+                        .setCustomId(`dibs_${playerId}`);
+                        
+                    const row = new ActionRowBuilder<ButtonBuilder>()
+                        .addComponents(attackButton, profileButton, dibsButton);
+                    
+                    await msg.edit({ embeds: [newEmbed], components: [row] }).catch(() => {});
+                }
+            } catch (error) {
+                console.error("Error updating components:", error);
+            }
+        } catch (error) {
+            console.error("Error updating message after dibs:", error);
+        }
+    } catch (error) {
+        console.error("Error handling dibs button:", error);
+        if (!interaction.replied && !interaction.deferred) {
+            await interaction.reply({ 
+                content: "Sorry, there was an error processing your request.", 
+                flags: MessageFlags.Ephemeral
+            }).catch(() => {});
+        }
+    }
+}
+
+// Function to display all current dibs
+async function showDibsList(message: Message) {
+    if (dibsRegistry.size === 0) {
+        await message.reply("No targets have been claimed yet.");
+        return;
+    }
+    
+    const embed = new EmbedBuilder()
+        .setTitle("🎯 Current Target Claims")
+        .setColor('#FFD700')
+        .setDescription("The following targets have been claimed:");
+    
+    // Add each claimed target to the embed
+    for (const [playerId, claimer] of dibsRegistry.entries()) {
+        const playerData = playerMessages.get(playerId);
+        let playerName = `Target ID: ${playerId}`;
+        
+        // Try to get player name from messages
+        if (playerData) {
+            try {
+                const channel = message.channel as TextChannel;
+                const playerMsg = await channel.messages.fetch(playerData.messageId);
+                if (playerMsg.embeds[0]?.title) {
+                    playerName = playerMsg.embeds[0].title;
+                }
+            } catch (error) {}
+        }
+        
+        const timeElapsed = Math.floor((Date.now() - claimer.timestamp) / 60000); // in minutes
+        
+        embed.addFields({
+            name: playerName,
+            value: `Claimed by: **${claimer.username}** (${timeElapsed} min ago)`
+        });
+    }
+    
+    await message.reply({ embeds: [embed] });
+}
+
 // Function to clear all messages in a channel
 async function clearAllMessages(channel: TextChannel, deleteAllMessages = false) {
     console.log(`Clearing ${deleteAllMessages ? 'all' : 'bot'} messages in channel: ${channel.name}`);
     
     try {
-        // Optimized: Fetch messages in batches for faster processing
         const fetchAndDeleteBatch = async (lastId?: string) => {
             const options: { limit: number; before?: string } = { limit: 100 };
             if (lastId) options.before = lastId;
@@ -608,14 +646,12 @@ async function clearAllMessages(channel: TextChannel, deleteAllMessages = false)
             const messages = await channel.messages.fetch(options);
             if (messages.size === 0) return false;
             
-            // Filter messages - either all messages or just bot messages
             const messagesToDelete = deleteAllMessages ? 
                 messages : 
                 messages.filter(msg => msg.author.id === client.user?.id);
                 
             if (messagesToDelete.size === 0) return messages.size === 100;
             
-            // Use bulk delete for recent messages (< 14 days)
             const recentMessages = messagesToDelete.filter(msg => 
                 Date.now() - msg.createdTimestamp < 1209600000
             );
@@ -626,21 +662,18 @@ async function clearAllMessages(channel: TextChannel, deleteAllMessages = false)
                 await recentMessages.first()?.delete();
             }
             
-            // Handle older messages individually
             const oldMessages = messagesToDelete.filter(msg => 
                 Date.now() - msg.createdTimestamp >= 1209600000
             );
             
-            for (const [_, message] of oldMessages) {
-                await message.delete().catch(() => {}); // Ignore errors
-                await new Promise(resolve => setTimeout(resolve, 500)); // Reduce rate limiting
+            for (const message of oldMessages.values()) {
+                await message.delete().catch(() => {});
+                await new Promise(resolve => setTimeout(resolve, 500));
             }
             
-            // Return true if we need to fetch more messages
             return messages.size === 100;
         };
         
-        // Keep fetching and deleting in batches until done
         let hasMore = true;
         let lastId;
         
@@ -650,6 +683,11 @@ async function clearAllMessages(channel: TextChannel, deleteAllMessages = false)
                 lastId = channel.messages.cache.lastKey();
             }
         }
+        
+        // Reset tracking variables
+        headerMessageId = null;
+        footerMessageId = null;
+        playerMessages.clear();
         
         console.log("Channel cleared successfully");
     } catch (error) {
@@ -661,13 +699,6 @@ async function clearAllMessages(channel: TextChannel, deleteAllMessages = false)
 interface Faction {
     id: number;
     name: string;
-}
-
-interface WarData {
-    ranked: {
-        end: number | null;
-        factions: Faction[];
-    };
 }
 
 interface LastAction {
@@ -704,7 +735,7 @@ interface Player {
     has_early_discharge: boolean;
 }
 
-// Add this export function at the end of your file
+// Export function for server.ts
 export async function startBot() {
   try {
     await client.login(BOT_TOKEN);
