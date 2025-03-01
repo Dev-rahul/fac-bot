@@ -299,6 +299,8 @@ const startMonitoring = async (opponentFactionId: number) => {
                     // 3. Player still in hospital but time changed significantly
                     if (currentTracking.state === 'hospital' && !inTargetTimeRange) {
                         needsDeletion = true;
+                    } else if (currentTracking.state === 'available' && !inTargetTimeRange) {
+                        needsDeletion = true;
                     } else if (currentTracking.state === 'available' && inTargetTimeRange) {
                         needsUpdate = true;
                     } else if (inTargetTimeRange) {
