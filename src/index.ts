@@ -1,6 +1,7 @@
 import { Client, Events, GatewayIntentBits, TextChannel, ActionRowBuilder, ButtonBuilder, ButtonStyle, 
          Message, EmbedBuilder, ButtonInteraction, Collection, Interaction, MessageFlags } from "discord.js";
-import { handleWarReportCommand, handleWarReportButton } from './warReport';
+import { handleWarReportCommand, handleWarReportButton } from './warReports/index';
+import { handleHelpCommand } from './commands/helpCommand'; // Add this import
 
 // Configuration constants
 const DEFAULT_CHECK_INTERVAL = 20_000;
@@ -53,57 +54,64 @@ client.once(Events.ClientReady, async () => {
 // Message handler with channel restriction
 client.on(Events.MessageCreate, async (message) => {
     if (message.author.bot || !message.content.startsWith(PREFIX)) return;
-    if (message.channelId !== CHANNEL_ID) return;
     
     const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
     const command = args.shift()?.toLowerCase();
     
-    if (command === "monitor") {
-        const action = args[0]?.toLowerCase();
-        
-        switch(action) {
-            case "start":
-                const maxTime = parseInt(args[1]) || 5;
-                const interval = parseInt(args[2]) || 20;
-                const factionId = parseInt(args[3]) || null;
-                await startMonitoringCommand(message, maxTime, interval, factionId);
-                break;
-                
-            case "stop":
-                await stopMonitoring(message);
-                break;
-                
-            case "status":
-                await showStatus(message);
-                break;
-                
-            case "clear":
-                const channel = message.channel as TextChannel;
-                await channel.send("Clearing all messages in the channel...");
-                await clearAllMessages(channel, true);
-                await channel.send("Channel cleared of all messages.");
-                break;
-                
-            case "dibs":
-                await showDibsList(message);
-                break;
-                
-            default:
-                await message.reply(
-                    "Usage:\n" +
-                    "`!monitor start [maxTime] [interval] [factionId]` - Start monitoring\n" +
-                    "  - maxTime: Maximum hospital time in minutes (default: 5)\n" +
-                    "  - interval: Check interval in seconds (default: 20)\n" +
-                    "  - factionId: Optional opponent faction ID (default: auto-detect from RW)\n" +
-                    "`!monitor stop` - Stop monitoring\n" +
-                    "`!monitor status` - Show monitoring status\n" +
-                    "`!monitor clear` - Clear all messages in channel\n" +
-                    "`!monitor dibs` - Show current target claims"
-                );
+    // Process channel-restricted commands
+    if (message.channelId === CHANNEL_ID) {
+        if (command === "monitor") {
+            const action = args[0]?.toLowerCase();
+            
+            switch(action) {
+                case "start":
+                    const maxTime = parseInt(args[1]) || 5;
+                    const interval = parseInt(args[2]) || 20;
+                    const factionId = parseInt(args[3]) || null;
+                    await startMonitoringCommand(message, maxTime, interval, factionId);
+                    break;
+                    
+                case "stop":
+                    await stopMonitoring(message);
+                    break;
+                    
+                case "status":
+                    await showStatus(message);
+                    break;
+                    
+                case "clear":
+                    const channel = message.channel as TextChannel;
+                    await channel.send("Clearing all messages in the channel...");
+                    await clearAllMessages(channel, true);
+                    await channel.send("Channel cleared of all messages.");
+                    break;
+                    
+                case "dibs":
+                    await showDibsList(message);
+                    break;
+                    
+                default:
+                    await message.reply(
+                        "Usage:\n" +
+                        "`!monitor start [maxTime] [interval] [factionId]` - Start monitoring\n" +
+                        "  - maxTime: Maximum hospital time in minutes (default: 5)\n" +
+                        "  - interval: Check interval in seconds (default: 20)\n" +
+                        "  - factionId: Optional opponent faction ID (default: auto-detect from RW)\n" +
+                        "`!monitor stop` - Stop monitoring\n" +
+                        "`!monitor status` - Show monitoring status\n" +
+                        "`!monitor clear` - Clear all messages in channel\n" +
+                        "`!monitor dibs` - Show current target claims"
+                    );
+            }
+        } 
+        else if (command === "warreport") {
+            await handleWarReportCommand(message, args);
         }
-    } 
-    else if (command === "warreport") {
-        await handleWarReportCommand(message, args);
+    }
+    
+    // Process commands that work in any channel
+    if (command === "help") {
+        await handleHelpCommand(message, args);
     }
 });
 

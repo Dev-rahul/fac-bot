@@ -8,7 +8,9 @@
     "build": "tsc"
   },
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "@supabase/supabase-js": "^2.49.1",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
