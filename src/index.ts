@@ -1,5 +1,6 @@
 import { Client, Events, GatewayIntentBits, TextChannel, ActionRowBuilder, ButtonBuilder, ButtonStyle, 
          Message, EmbedBuilder, ButtonInteraction, Collection, Interaction, MessageFlags } from "discord.js";
+import { handleWarReportCommand, handleWarReportButton } from './warReport';
 
 // Configuration constants
 const DEFAULT_CHECK_INTERVAL = 20_000;
@@ -100,6 +101,9 @@ client.on(Events.MessageCreate, async (message) => {
                     "`!monitor dibs` - Show current target claims"
                 );
         }
+    } 
+    else if (command === "warreport") {
+        await handleWarReportCommand(message, args);
     }
 });
 
@@ -117,6 +121,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
     const customId = interaction.customId;
     if (customId.startsWith('dibs_')) {
         await handleDibsButton(interaction);
+    } 
+    else if (customId.startsWith('warreport_') || customId.startsWith('pay_')) {
+        await handleWarReportButton(interaction);
     }
 });
 
