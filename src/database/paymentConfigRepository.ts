@@ -26,7 +26,8 @@ const defaultConfigs: Record<string, number> = {
   min_respect: 8,
   hit_multiplier: 0,
   rw_hit_multiplier: 0.8, 
-  assist_multiplier: 0.2
+  assist_multiplier: 0.2,
+  payout_percentage: 85  // Add the payout percentage default (85%)
 };
 
 /**
@@ -149,6 +150,8 @@ function getDefaultDescription(key: string): string {
       return 'Multiplier for ranked war hits';
     case 'assist_multiplier':
       return 'Multiplier for assists';
+    case 'payout_percentage':
+      return 'Percentage of the total bounty to distribute to members (0-100)';
     default:
       return 'Custom configuration value';
   }
