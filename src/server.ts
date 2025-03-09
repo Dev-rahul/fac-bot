@@ -17,7 +17,7 @@ setInterval(async () => {
   const now = new Date();
   
   // Check if it's around 1:00 AM UTC (between 1:00 and 1:59)
-  if (now.getUTCHours() === 22) {
+  if (now.getUTCHours() ===22) {
     // Check if we should run the sync
     const shouldRunSync = await shouldSync();
     
@@ -61,6 +61,15 @@ const server = serve({
       if (providedSecret !== API_SECRET) {
         return new Response("Unauthorized", { status: 401 });
       }
+
+      syncFactionMembers()
+      .then(result => {
+        console.log('Member sync completed via API:', result.message);
+      })
+      .catch(error => {
+        console.error('Member sync failed via API:', error);
+      });
+
       
       // Handle the sync request
       return new Response(
@@ -72,13 +81,6 @@ const server = serve({
       );
       
       // Process sync in the background
-      syncFactionMembers()
-        .then(result => {
-          console.log('Member sync completed via API:', result.message);
-        })
-        .catch(error => {
-          console.error('Member sync failed via API:', error);
-        });
     }
     
     // Status endpoint to check last sync time
