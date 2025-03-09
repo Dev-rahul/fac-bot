@@ -109,13 +109,13 @@ export async function updateFactionMembers(): Promise<{
     }));
     
     // Perform upsert operation (update if exists, insert if not)
-    const { error, count } = await supabase
+    // Remove the count selection that was causing the error
+    const { error } = await supabase
       .from('faction_members')
       .upsert(upsertData, {
         onConflict: 'id', // Conflict on primary key
         ignoreDuplicates: false // Update if exists
-      })
-      .select('count');
+      });
     
     if (error) {
       throw error;
@@ -123,20 +123,39 @@ export async function updateFactionMembers(): Promise<{
     
     console.log(`Successfully synced ${members.length} faction members`);
     
-    // Get position statistics
-    const { data: positionCounts, error: countError } = await supabase
-      .from('faction_members')
-      .select('position, count(*)')
-      .group('position');
-      
-    const stats = !countError && positionCounts ? 
-      positionCounts.map(p => `${p.position}: ${p.count}`).join(', ') : 
-      'Statistics unavailable';
+    // Get position statistics in a separate query instead
+    let statsText = '';
+    try {
+      const { data: positionCounts, error: countError } = await supabase
+        .from('faction_members')
+        .select('position')
+        .then(result => {
+          if (result.error) throw result.error;
+          
+          // Count positions manually
+          const positions: Record<string, number> = {};
+          result.data.forEach(member => {
+            const pos = member.position || 'Unknown';
+            positions[pos] = (positions[pos] || 0) + 1;
+          });
+          
+          return { 
+            data: Object.entries(positions).map(([position, count]) => ({ position, count })),
+            error: null
+          };
+        });
+        
+      if (!countError && positionCounts) {
+        statsText = positionCounts.map(p => `${p.position}: ${p.count}`).join(', ');
+      }
+    } catch (statsError) {
+      console.warn('Could not generate position statistics:', statsError);
+    }
     
     return {
       success: true,
       count: members.length,
-      message: `Successfully synced ${members.length} faction members. ${stats}`
+      message: `Successfully synced ${members.length} faction members. ${statsText}`
     };
     
   } catch (error) {
