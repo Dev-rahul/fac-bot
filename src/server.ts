@@ -17,7 +17,7 @@ setInterval(async () => {
   const now = new Date();
   
   // Check if it's around 1:00 AM UTC (between 1:00 and 1:59)
-  if (now.getUTCHours() === 1) {
+  if (now.getUTCHours() === 22) {
     // Check if we should run the sync
     const shouldRunSync = await shouldSync();
     
