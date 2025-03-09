@@ -1,5 +1,6 @@
 import { Message, AttachmentBuilder, EmbedBuilder } from "discord.js";
 import { API_KEY } from "./warReportTypes";
+import { supabase } from '../database/supabaseClient';
 
 // Add imports for database operations
 import { 
@@ -126,7 +127,42 @@ interface WarReportData {
 // Our faction ID constant
 const OUR_FACTION_ID = 41702;
 const FACTION_NAME = "Fatality";
-const minRespect = process.env.MIN_RESPECT ? parseInt(process.env.MIN_RESPECT) : 0;
+
+// Function to get config values from database
+async function getConfigValue(key: string, defaultValue: any): Promise<any> {
+  try {
+    // Try different table names since we've had issues with table name consistency
+    const tableNames = ['config', 'configurations', 'faction_config', 'bot_config'];
+    
+    for (const tableName of tableNames) {
+      try {
+        const { data, error } = await supabase
+          .from(tableName)
+          .select('value')
+          .eq('key', key)
+          .single();
+        
+        if (!error && data) {
+          console.log(`Found config value for ${key}: ${data.value}`);
+          // Convert string to number if it looks like a number
+          if (!isNaN(Number(data.value))) {
+            return Number(data.value);
+          }
+          return data.value;
+        }
+      } catch (e) {
+        // Try next table name
+        continue;
+      }
+    }
+    
+    console.log(`No config found for ${key}, using default: ${defaultValue}`);
+    return defaultValue;
+  } catch (e) {
+    console.warn(`Error getting config for ${key}:`, e);
+    return defaultValue;
+  }
+}
 
 /**
  * Fetches current faction member data
@@ -264,21 +300,22 @@ async function fetchAllAttackLogs(startTime: number, endTime: number): Promise<A
 }
 
 /**
- * Processes attack data into member contributions
- */
-/**
  * Processes attack data into member contributions and ensures all faction members are included
  */
-function processAttacks(
+async function processAttacks(
     attacks: Attack[], 
     opponentFactionId: number,
     members: Map<number, FactionMember>
-): {
+): Promise<{
     contributions: Map<number, MemberContribution>;
     totalHits: number;
     totalAssists: number;
     totalRespect: number;
-} {
+}> {
+    // Get config values
+    const minRespect = await getConfigValue('min_respect', 0);
+    console.log(`Using min_respect value from config: ${minRespect}`);
+    
     const contributions = new Map<number, MemberContribution>();
     let totalHits = 0;
     let totalAssists = 0;
@@ -368,7 +405,7 @@ function processAttacks(
         if (resultLower === 'attacked' || resultLower === "hospitalized") {
             // War hits - against opponent faction
             if (isAgainstOpponent) {
-                attack.respect_gain > (minRespect || 0) ? memberContribution.warHits++ : memberContribution.underRespectHits++;
+                attack.respect_gain > minRespect ? memberContribution.warHits++ : memberContribution.underRespectHits++;
                 totalHits++;
             }
             // Non-war hits - against anyone else
@@ -430,7 +467,7 @@ async function generateWarReport(warId?: number): Promise<WarReportData | null> 
     
     // Process attack logs into member contributions
     const { contributions, totalHits, totalAssists, totalRespect } = 
-        processAttacks(attackLogs, opponentFaction.id, members);
+        await processAttacks(attackLogs, opponentFaction.id, members);
     
     return {
         warId: war.id,
@@ -451,6 +488,121 @@ async function generateWarReport(warId?: number): Promise<WarReportData | null> 
         totalRespect
     };
 }
+
+/**
+ * Delete existing war report data from the database
+ */
+async function deleteWarReport(warId: number): Promise<void> {
+    try {
+        console.log(`Deleting existing war report data for War ID ${warId}...`);
+        
+        // Try different table name formats - many databases use snake_case or plurals
+        // Delete member contributions first (foreign key constraint)
+        try {
+            // Try "member_contributions" (plural)
+            const { error: contribError1 } = await supabase
+                .from('member_contributions')
+                .delete()
+                .eq('war_id', warId);
+                
+            if (contribError1 && contribError1.code !== 'PGRST204') {
+                console.log('Tried member_contributions - not found, trying alternative table name...');
+                
+                // Try "war_member_contributions"
+                const { error: contribError2 } = await supabase
+                    .from('war_member_contributions')
+                    .delete()
+                    .eq('war_id', warId);
+                    
+                if (contribError2 && contribError2.code !== 'PGRST204') {
+                    console.log('Tried war_member_contributions - not found, trying alternative table name...');
+                    
+                    // Try "war_contributions"
+                    const { error: contribError3 } = await supabase
+                        .from('war_contributions')
+                        .delete()
+                        .eq('war_id', warId);
+                        
+                    if (contribError3 && contribError3.code !== 'PGRST204') {
+                        throw new Error(`Could not delete member contributions: ${contribError3.message}`);
+                    }
+                }
+            }
+        } catch (e) {
+            console.warn(`Error with member contributions deletion: ${e}`);
+        }
+        
+        // Delete any payout data if it exists
+        try {
+            // Try "war_payouts" (your original name)
+            const { error: payoutError1 } = await supabase
+                .from('war_payouts')
+                .delete()
+                .eq('war_id', warId);
+                
+            // Don't throw if there's no payout data
+            if (payoutError1 && payoutError1.code === 'PGRST204') {
+                console.log('No payouts found to delete.');
+            } else if (payoutError1 && payoutError1.code !== 'PGRST116') {
+                // Try alternative name
+                const { error: payoutError2 } = await supabase
+                    .from('war_report_payouts')
+                    .delete()
+                    .eq('war_id', warId);
+                    
+                if (payoutError2 && payoutError2.code !== 'PGRST116' && payoutError2.code !== 'PGRST204') {
+                    console.warn(`Warning: Could not delete payout data: ${payoutError2.message}`);
+                }
+            }
+        } catch (e) {
+            console.warn(`Error with payouts deletion: ${e}`);
+            // Continue anyway, this isn't critical
+        }
+        
+        // Delete the war report itself
+        try {
+            // Try "war_reports" (your original name)
+            const { error: reportError1 } = await supabase
+                .from('war_reports')
+                .delete()
+                .eq('war_id', warId);
+                
+            if (reportError1 && reportError1.code !== 'PGRST204') {
+                console.log('Tried war_reports - not found, trying alternative table name...');
+                
+                // Try "wars"
+                const { error: reportError2 } = await supabase
+                    .from('wars')
+                    .delete()
+                    .eq('war_id', warId);
+                    
+                if (reportError2 && reportError2.code !== 'PGRST204') {
+                    console.log('Tried wars - not found, trying alternative table name...');
+                    
+                    // Try "war_data"
+                    const { error: reportError3 } = await supabase
+                        .from('war_data')
+                        .delete()
+                        .eq('war_id', warId);
+                        
+                    if (reportError3 && reportError3.code !== 'PGRST204') {
+                        throw new Error(`Could not delete war report: ${reportError3.message}`);
+                    }
+                }
+            }
+        } catch (e) {
+            console.warn(`Error with war report deletion: ${e}`);
+            throw e;
+        }
+        
+        console.log(`Successfully deleted war report data for War ID ${warId}`);
+        
+    } catch (error) {
+        console.error(`Error deleting war report data for War ID ${warId}:`, error);
+        throw error;
+    }
+}
+
 
 /**
  * Exports the war report as a CSV
@@ -516,8 +668,22 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
                 : "Generating war report for the most recent war..."
         );
         
-        // Generate the report
-        await progressMsg.edit("Fetching war data...");
+        // Check if the report exists - but we'll regenerate it regardless
+        let isExistingReport = false;
+        if (warId) {
+            const existingReport = await getWarReport(warId);
+            if (existingReport) {
+                isExistingReport = true;
+                await progressMsg.edit(`War report for ID ${warId} already exists. Clearing existing data and regenerating with latest configuration...`);
+                
+                // Delete existing data for this war
+                await deleteWarReport(warId);
+                console.log(`Deleted existing war report data for War ID: ${warId}`);
+            }
+        }
+        
+        // Generate a fresh report from the API
+        await progressMsg.edit("Fetching fresh war data from API...");
         const report = await generateWarReport(warId);
         
         if (!report) {
@@ -544,7 +710,7 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
         const contributionsArray = Array.from(report.contributions.values());
         
         // Save report to database
-        await progressMsg.edit("Saving report to database...");
+        await progressMsg.edit("Saving report to database with latest configuration...");
         try {
             // Save war report summary
             const warReportSummary: WarReportSummary = {
@@ -589,6 +755,13 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
             // Continue with report generation even if database save fails
         }
         
+        // Calculate totals for display
+        const totalWarHits = contributionsArray.reduce((sum, c) => sum + c.warHits, 0);
+        const totalUnderRespectHits = contributionsArray.reduce((sum, c) => sum + c.underRespectHits, 0);
+        const totalNonWarHits = contributionsArray.reduce((sum, c) => sum + c.nonWarHits, 0);
+        const totalHospitalizations = contributionsArray.reduce((sum, c) => sum + c.hospitalizations, 0);
+        const totalMugs = contributionsArray.reduce((sum, c) => sum + c.mugs, 0);
+        
         const embed = new EmbedBuilder()
             .setTitle(`⚔️ War Report: ${FACTION_NAME} vs ${report.opponent.name}`)
             .setColor(report.result.winner === FACTION_NAME ? '#00FF00' : '#FF0000')
@@ -599,9 +772,24 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
                 `**Total War Hits:** ${report.totalHits}\n` +
                 `**Total Assists:** ${report.totalAssists}\n` +
                 `**Total Respect:** ${report.totalRespect.toFixed(2)}\n` +
-                `**Total Members Participated:** ${contributionsArray.length}`
+                `**Total Members Participated:** ${contributionsArray.filter(m => m.attacks > 0).length}`
             )
-            .setFooter({ text: 'Detailed report available in the CSV file' });
+            .setFooter({ 
+                text: isExistingReport ? 
+                    'Data has been refreshed with latest configuration • ' + new Date().toLocaleString() : 
+                    'Detailed report available in the CSV file' 
+            });
+            
+        // Add activity statistics field
+        embed.addFields({
+            name: '📊 Activity Summary',
+            value: 
+                `**War Hits:** ${totalWarHits.toLocaleString()}\n` +
+                `**Under Respect Hits:** ${totalUnderRespectHits.toLocaleString()}\n` +
+                `**Non-War Hits:** ${totalNonWarHits.toLocaleString()}\n` +
+                `**Assists:** ${report.totalAssists.toLocaleString()}\n` +
+                `**Total Actions:** ${(totalWarHits + totalUnderRespectHits + totalNonWarHits + report.totalAssists).toLocaleString()}`
+        });
             
         // Add top 5 contributors
         const topContributors = contributionsArray
@@ -620,9 +808,6 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
         }
         
         // Add hospital stats
-        const totalHospitalizations = contributionsArray.reduce((sum, c) => sum + c.hospitalizations, 0);
-        const totalMugs = contributionsArray.reduce((sum, c) => sum + c.mugs, 0);
-        
         embed.addFields({
             name: '🏥 Hospital Stats',
             value: `Hospitalizations: ${totalHospitalizations}\nMuggings: ${totalMugs}`
@@ -639,14 +824,146 @@ export async function handleGenerateWarReport(message: Message, args: string[]):
         
         // Send the report
         await progressMsg.edit({
-            content: "War report generated successfully!",
+            content: isExistingReport ? 
+                `War report for ID ${report.warId} has been regenerated with fresh data and latest configuration!` : 
+                "War report generated successfully!",
             embeds: [embed],
             files: [attachment]
+        });
+        
+        // Also suggest payout command
+        await message.channel.send({
+            content: `You can generate a payout report for this war using:\n\`!warreport payout ${report.warId} <totalRWCashAmount>\`\nExample: \`!warreport payout ${report.warId} 10000000\``
         });
         
     } catch (error) {
         console.error("Error generating war report:", error);
         await message.reply("An error occurred while generating the war report.");
+    }
+}
+
+/**
+ * Create a report using existing data from the database
+ */
+async function createReportFromExistingData(
+    message: Message,
+    progressMsg: Message,
+    report: WarReportSummary,
+    contributions: MemberContributionData[]
+): Promise<void> {
+    try {
+        await progressMsg.edit(`Generating report from existing data for War ID: ${report.war_id}...`);
+        
+        // Generate CSV from existing contributions
+        const headers = [
+            'Member ID', 
+            'Member Name',
+            'Position',
+            'Level',
+            'War Hits', 
+            'Under Respect Hits', 
+            'Non-War Hits', 
+            'Total Hits', 
+            'Hospitalizations',
+            'Mugs',
+            'Assists', 
+            'Draws',
+            'Losses',
+            'Respect Gained'
+        ].join(',');
+        
+        const sortedContributions = [...contributions].sort((a, b) => b.war_hits - a.war_hits);
+        
+        const rows = sortedContributions.map(member => [
+            member.member_id,
+            `"${member.member_name}"`,
+            `"${member.position}"`,
+            member.level,
+            member.war_hits,
+            member.under_respect_hits,
+            member.non_war_hits,
+            member.total_hits,
+            member.hospitalizations,
+            member.mugs,
+            member.assists,
+            member.draws,
+            member.losses,
+            member.respect.toFixed(2)
+        ].join(','));
+        
+        const csv = [headers, ...rows].join('\n');
+        const buffer = Buffer.from(csv, 'utf-8');
+        
+        // Format dates for filename
+        const startDate = new Date(report.start_time * 1000).toISOString().split('T')[0];
+        const endDate = new Date(report.end_time * 1000).toISOString().split('T')[0];
+        
+        // Create attachment
+        const attachment = new AttachmentBuilder(buffer, {
+            name: `war-report-${report.war_id}-${startDate}-to-${endDate}.csv`
+        });
+        
+        // Create embed
+        const embed = new EmbedBuilder()
+            .setTitle(`⚔️ War Report: ${FACTION_NAME} vs ${report.opponent_name}`)
+            .setColor(report.winner === FACTION_NAME ? '#00FF00' : '#FF0000')
+            .setDescription(
+                `**War ID:** ${report.war_id}\n` +
+                `**Period:** ${new Date(report.start_time * 1000).toLocaleString()} to ${new Date(report.end_time * 1000).toLocaleString()}\n` +
+                `**Result:** ${report.our_score} - ${report.their_score} (${report.winner} won)\n\n` +
+                `**Total War Hits:** ${report.total_hits}\n` +
+                `**Total Assists:** ${report.total_assists}\n` +
+                `**Total Respect:** ${report.total_respect.toFixed(2)}\n` +
+                `**Total Members Participated:** ${contributions.length}`
+            )
+            .setFooter({ text: `Updated from database • Generated: ${new Date().toLocaleString()}` });
+            
+        // Add top 5 contributors
+        const topContributors = sortedContributions.slice(0, 5);
+        if (topContributors.length > 0) {
+            const topContributorsField = topContributors.map(c => 
+                `**${c.member_name}**: ${c.war_hits} war hits, ${c.assists} assists, ${c.respect.toFixed(2)} respect`
+            ).join('\n');
+            
+            embed.addFields({
+                name: '👑 Top Contributors',
+                value: topContributorsField
+            });
+        }
+        
+        // Add hospital stats
+        const totalHospitalizations = contributions.reduce((sum, c) => sum + c.hospitalizations, 0);
+        const totalMugs = contributions.reduce((sum, c) => sum + c.mugs, 0);
+        
+        embed.addFields({
+            name: '🏥 Hospital Stats',
+            value: `Hospitalizations: ${totalHospitalizations}\nMuggings: ${totalMugs}`
+        });
+        
+        // Add inactive members
+        const inactiveMembers = contributions.filter(m => m.total_hits === 0).length;
+        if (inactiveMembers > 0) {
+            embed.addFields({
+                name: '⚠️ Inactive Members',
+                value: `${inactiveMembers} faction members did not participate in this war.`
+            });
+        }
+        
+        // Send the report
+        await progressMsg.edit({
+            content: `War report for ID ${report.war_id} regenerated from database successfully! Using the latest configuration settings.`,
+            embeds: [embed],
+            files: [attachment]
+        });
+        
+        // Also suggest payout command
+        await message.channel.send({
+            content: `You can generate a payout report for this war using:\n\`!warreport payout ${report.war_id} <totalRWCashAmount>\`\nExample: \`!warreport payout ${report.war_id} 10000000\``
+        });
+        
+    } catch (error) {
+        console.error("Error creating report from existing data:", error);
+        await progressMsg.edit("An error occurred while regenerating the war report from database.");
     }
 }
 

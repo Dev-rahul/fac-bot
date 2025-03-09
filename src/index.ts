@@ -1,7 +1,17 @@
 import { Client, Events, GatewayIntentBits, TextChannel, ActionRowBuilder, ButtonBuilder, ButtonStyle, 
          Message, EmbedBuilder, ButtonInteraction, Collection, Interaction, MessageFlags } from "discord.js";
-import { handleWarReportCommand, handleWarReportButton } from './warReports/index';
+import { handleWarReportCommand } from './warReports/index';
 import { handleHelpCommand } from './commands/helpCommand'; // Add this import
+import { 
+  handlePaginationButton, 
+  handleVerifyButton, 
+  handleUnpaidButton, 
+  handleDoubleCheckButton, 
+  handleExportButton 
+} from './warReports/interactionHandlers';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Configuration constants
 const DEFAULT_CHECK_INTERVAL = 20_000;
@@ -132,6 +142,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
     } 
     else if (customId.startsWith('warreport_') || customId.startsWith('pay_')) {
         await handleWarReportButton(interaction);
+    } else if (customId === 'first' || customId === 'prev' || customId === 'next' || customId === 'last') {
+        await handlePaginationButton(interaction);
+    } else if (customId === 'verify') {
+        await handleVerifyButton(interaction);
+    } else if (customId === 'unpaid') {
+        await handleUnpaidButton(interaction);
+    } else if (customId === 'doublecheck') {
+        await handleDoubleCheckButton(interaction);
+    } else if (customId === 'export') {
+        await handleExportButton(interaction);
+    } else {
+        console.log(`Unknown button ID: ${customId}`);
     }
 });
 

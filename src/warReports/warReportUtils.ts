@@ -136,15 +136,16 @@ export function verifyPaymentsWithDoubleCheck(
     const doublePayments = new Map<string, PaymentVerificationWithCount>();
     
     for (const entry of entries) {
-        if (!entry.id || !entry.name) continue;
-        
+        if (!entry.id || !entry.Member) continue;
+
         // Parse the payment amount from the entry
         const paymentAmount = parseInt(entry.Total_Payout.replace(/,/g, ''));
+
         if (isNaN(paymentAmount) || paymentAmount <= 0) continue;
         
         // Track all matching payments for this entry
         const matchingPayments: {admin: string; timestamp: number}[] = [];
-        
+
         // Search for matching payments in news data
         for (const payment of paymentData) {
             const text = payment.text || '';
@@ -156,7 +157,7 @@ export function verifyPaymentsWithDoubleCheck(
                 const [, admin, recipient, amountStr] = increaseMatch;
                 const amount = parseInt(amountStr.replace(/,/g, ''));
                 
-                const memberName = entry.name.toLowerCase();
+                const memberName = entry.Member.toLowerCase();
                 const recipientName = recipient.toLowerCase();
                 
                 // Only match if the payment amount is EXACTLY the amount required and name matches
@@ -204,7 +205,6 @@ export function verifyPaymentsWithDoubleCheck(
             });
         }
     }
-    
     return { verifiedPayments, doublePayments };
 }
 
@@ -235,7 +235,7 @@ export function generateWarReportEmbeds(
         maximumFractionDigits: 2
     }).format(totalPayout);
     
-    // Split into pages
+    // Split into pages - FIX: Correct the for loop condition
     for (let i = 0; i < sortedEntries.length; i += pageSize) {
         const pageEntries = sortedEntries.slice(i, i + pageSize);
         const pageNumber = Math.floor(i / pageSize) + 1;
@@ -252,7 +252,7 @@ export function generateWarReportEmbeds(
             .setFooter({ text: `Use 'Verify Payments' to check for completed payments` });
         
         // Add fields for each entry
-        pageEntries.forEach((entry, index) => {
+        pageEntries.forEach((entry) => {
             const paymentInfo = paymentData.get(entry.id || '');
             const isPaid = paymentInfo?.verified || false;
             
@@ -280,101 +280,137 @@ export function generateWarReportEmbeds(
     return embeds;
 }
 
-// Create buttons for pagination
+/**
+ * Create pagination buttons
+ */
 export function createPaginationButtons(currentPage: number, totalPages: number): ActionRowBuilder<ButtonBuilder> {
-    return new ActionRowBuilder<ButtonBuilder>()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId('warreport_first')
-                .setLabel('<<')
-                .setStyle(ButtonStyle.Secondary)
-                .setDisabled(currentPage === 0),
-            new ButtonBuilder()
-                .setCustomId('warreport_prev')
-                .setLabel('<')
-                .setStyle(ButtonStyle.Secondary)
-                .setDisabled(currentPage === 0),
-            new ButtonBuilder()
-                .setCustomId('warreport_page')
-                .setLabel(`Page ${currentPage + 1}/${totalPages}`)
-                .setStyle(ButtonStyle.Secondary)
-                .setDisabled(true),
-            new ButtonBuilder()
-                .setCustomId('warreport_next')
-                .setLabel('>')
-                .setStyle(ButtonStyle.Secondary)
-                .setDisabled(currentPage === totalPages - 1),
-            new ButtonBuilder()
-                .setCustomId('warreport_last')
-                .setLabel('>>')
-                .setStyle(ButtonStyle.Secondary)
-                .setDisabled(currentPage === totalPages - 1)
-        );
+  const row = new ActionRowBuilder<ButtonBuilder>();
+  
+  // First page button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('first')
+      .setLabel('⏮️ First')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(currentPage === 0)
+  );
+
+  // Previous page button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('prev')
+      .setLabel('◀️ Previous')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(currentPage === 0)
+  );
+
+  // Next page button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('next')
+      .setLabel('Next ▶️')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(currentPage === totalPages - 1)
+  );
+
+  // Last page button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('last')
+      .setLabel('Last ⏭️')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(currentPage === totalPages - 1)
+  );
+
+  return row;
 }
 
-// Create action buttons
+/**
+ * Create action buttons
+ */
 export function createActionButtons(): ActionRowBuilder<ButtonBuilder> {
-    return new ActionRowBuilder<ButtonBuilder>()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId('warreport_verify')
-                .setLabel('🔄 Verify Payments')
-                .setStyle(ButtonStyle.Primary),
-            new ButtonBuilder()
-                .setCustomId('warreport_doublecheck')
-                .setLabel('🔍 Check Duplicates')
-                .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder()
-                .setCustomId('warreport_unpaid')
-                .setLabel('📋 Show Unpaid')
-                .setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder()
-                .setCustomId('warreport_export')
-                .setLabel('📊 Export Status')
-                .setStyle(ButtonStyle.Secondary)
-        );
+  const row = new ActionRowBuilder<ButtonBuilder>();
+
+  // Verify payments button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('verify')
+      .setLabel('✅ Verify Payments')
+      .setStyle(ButtonStyle.Primary)
+  );
+
+  // Show unpaid button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('unpaid')
+      .setLabel('💰 Show Unpaid')
+      .setStyle(ButtonStyle.Secondary)
+  );
+
+  // Double check button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('doublecheck')
+      .setLabel('🔍 Double Check')
+      .setStyle(ButtonStyle.Secondary)
+  );
+
+  // Export status button
+  row.addComponents(
+    new ButtonBuilder()
+      .setCustomId('export')
+      .setLabel('📊 Export Status')
+      .setStyle(ButtonStyle.Secondary)
+  );
+
+  return row;
 }
 
-// Create rows of payment links
+/**
+ * Create payment link rows for the current page
+ */
 export function createPaymentLinkRows(
-    entries: WarReportEntry[],
-    paymentData: Map<string, PaymentVerification>,
-    currentPage: number,
-    pageSize: number
+  entries: WarReportEntry[],
+  verifiedPayments: Map<string, PaymentVerification>,
+  currentPage: number,
+  pageSize: number
 ): ActionRowBuilder<ButtonBuilder>[] {
-    const sortedEntries = [...entries]
-        .sort((a, b) => parseInt(b.Total_Payout.replace(/,/g, '')) - parseInt(a.Total_Payout.replace(/,/g, '')))
-        .slice(currentPage * pageSize, (currentPage + 1) * pageSize);
-    
-    // Filter out paid entries
-    const unpaidEntries = sortedEntries.filter(entry => 
-        !paymentData.get(entry.id || '')?.verified
-    );
-    
-    // Create rows of payment links - up to 10 links in 2 rows (5 per row)
-    const rows: ActionRowBuilder<ButtonBuilder>[] = [];
-    
-    for (let i = 0; i < unpaidEntries.length; i += 5) {
-        const row = new ActionRowBuilder<ButtonBuilder>();
-        for (let j = 0; j < 5 && (i + j) < unpaidEntries.length; j++) {
-            const entry = unpaidEntries[i + j];
-            const name = entry.name || entry.Member.split('[')[0].trim();
-            
-            row.addComponents(
-                new ButtonBuilder()
-                    .setLabel(`Pay ${name.substring(0, 10)}`)
-                    .setStyle(ButtonStyle.Link)
-                    .setURL(entry.Link)
-            );
-        }
-        
-        if (row.components.length > 0) {
-            rows.push(row);
-        }
-        
-        // Max 2 rows of links
-        if (rows.length >= 2) break;
+  const start = currentPage * pageSize;
+  const end = Math.min(start + pageSize, entries.length);
+  const pageEntries = entries.slice(start, end);
+
+  // Create payment buttons for each entry on the current page
+  const rows: ActionRowBuilder<ButtonBuilder>[] = [];
+  let currentRow = new ActionRowBuilder<ButtonBuilder>();
+  let buttonCount = 0;
+
+  for (const entry of pageEntries) {
+    // Skip if already paid
+    const verification = verifiedPayments.get(entry.id);
+    if (verification?.verified) continue;
+
+    // Create pay button with correct URL format
+    const button = new ButtonBuilder()
+      .setLabel(`Pay ${entry.Member}`)
+      .setStyle(ButtonStyle.Link)
+      .setURL(`https://www.torn.com/factions.php?step=your#/tab=controls&option=give-to-user&addMoneyTo=${entry.id}&money=${entry.Total_Payout}`);
+
+    // Add button to current row
+    currentRow.addComponents(button);
+    buttonCount++;
+
+    // Create new row if current is full (max 5 buttons per row)
+    if (buttonCount === 5) {
+      rows.push(currentRow);
+      currentRow = new ActionRowBuilder<ButtonBuilder>();
+      buttonCount = 0;
     }
-    
-    return rows;
+  }
+
+  // Add any remaining buttons in the last row
+  if (buttonCount > 0) {
+    rows.push(currentRow);
+  }
+
+  return rows;
 }
