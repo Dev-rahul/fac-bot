@@ -2,7 +2,7 @@ import { Message } from 'discord.js';
 import { handleWarReportCommand as originalHandler, handleWarReportButton } from './warReportCommands';
 import { handleGenerateWarReport, handleHistoricalReports } from './warReportGenerator';
 import { handleConfigCommand } from './configCommand';
-import { handleRWPayoutCommand } from './rwPayoutCommand';
+import { handleRWPayoutCommand, handlePayoutHistoryCommand, handleVerifyAllPayments } from './rwPayoutCommand';
 
 // Enhanced handler that includes all functionality
 export async function handleWarReportCommand(message: Message, args: string[]): Promise<void> {
@@ -27,6 +27,15 @@ export async function handleWarReportCommand(message: Message, args: string[]): 
   // Check for payout command
   if (args.length > 0 && (args[0].toLowerCase() === 'payout' || args[0].toLowerCase() === 'pay')) {
     await handleRWPayoutCommand(message, args.slice(1));
+    return;
+  }
+  else if (args[0]?.toLowerCase() === 'history') {
+    const historyArgs = args.slice(1);
+    await handlePayoutHistoryCommand(message, historyArgs);
+    return;
+  }
+  else if (args[0]?.toLowerCase() === 'verify' && args[1]?.toLowerCase() === 'all') {
+    await handleVerifyAllPayments(message);
     return;
   }
   

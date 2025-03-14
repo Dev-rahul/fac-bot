@@ -103,7 +103,6 @@ export async function handleVerifyButton(interaction: ButtonInteraction): Promis
       paymentNewsData
     );
     
-    console.log(verifiedPayments, "verifiedPayments")
     // Update report data
     reportData.paymentData = verifiedPayments;
     activeReports.set(messageId, reportData);

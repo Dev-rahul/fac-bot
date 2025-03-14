@@ -9,9 +9,8 @@ import {
   handleDoubleCheckButton, 
   handleExportButton 
 } from './warReports/interactionHandlers';
-import dotenv from 'dotenv';
+import {handleFundsCommand, handleFundsButtonInteraction} from './fundManagement/fundManager';
 
-dotenv.config();
 
 // Configuration constants
 const DEFAULT_CHECK_INTERVAL = 20_000;
@@ -114,6 +113,9 @@ client.on(Events.MessageCreate, async (message) => {
                     );
             }
         } 
+        if (command === "funds") {
+            await handleFundsCommand(message, args);
+        } 
         else if (command === "warreport") {
             await handleWarReportCommand(message, args);
         }
@@ -137,12 +139,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
     
     const customId = interaction.customId;
-    if (customId.startsWith('dibs_')) {
+    if (customId.startsWith('funds_')) {
+        await handleFundsButtonInteraction(interaction);
+      }
+    else if (customId.startsWith('dibs_')) {
         await handleDibsButton(interaction);
     } 
-    else if (customId.startsWith('warreport_') || customId.startsWith('pay_')) {
-        await handleWarReportButton(interaction);
-    } else if (customId === 'first' || customId === 'prev' || customId === 'next' || customId === 'last') {
+    // else if (customId.startsWith('warreport_') || customId.startsWith('pay_')) {
+    //     await handleWarReportButton(interaction);
+    // } 
+    
+    else if (customId === 'first' || customId === 'prev' || customId === 'next' || customId === 'last') {
         await handlePaginationButton(interaction);
     } else if (customId === 'verify') {
         await handleVerifyButton(interaction);

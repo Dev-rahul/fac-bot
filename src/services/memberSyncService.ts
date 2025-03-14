@@ -53,7 +53,7 @@ async function fetchFactionMembers(): Promise<FactionMember[]> {
           name: member.name,
           level: member.level,
           days_in_faction: member.days_in_faction,
-          revive_setting: member.revive || 'Unknown',
+          revive_setting: member.revive_setting || 'Unknown',
           position: member.position,
           status: member.status?.state || 'Unknown',
           last_action: member.last_action?.timestamp
