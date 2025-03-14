@@ -10,7 +10,7 @@ import {
   handleExportButton 
 } from './warReports/interactionHandlers';
 import {handleFundsCommand, handleFundsButtonInteraction} from './fundManagement/fundManager';
-
+import {handleFactionCommand} from './factionReport/memberReport';
 
 // Configuration constants
 const DEFAULT_CHECK_INTERVAL = 20_000;
@@ -112,6 +112,10 @@ client.on(Events.MessageCreate, async (message) => {
                         "`!monitor dibs` - Show current target claims"
                     );
             }
+        } 
+        if (command === "faction") {
+            await handleFactionCommand(message, args);
+            return;
         } 
         if (command === "funds") {
             await handleFundsCommand(message, args);

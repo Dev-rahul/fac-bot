@@ -329,11 +329,16 @@ export async function handleFundsCommand(message: Message, args: string[]): Prom
       await handleTransactionHistoryCommand(message, args.slice(1));
       break;
       
+    case 'log':
+      await handleLogParseCommand(message, args.slice(1));
+      break;
+      
     default:
       await message.reply(
         "Available commands:\n" +
         "`!funds status` - View current faction fund balance\n" +
-        "`!funds add <type> <amount> <category> <description>` - Record a transaction\n" +
+        "`!funds add <type> <amount> <category> <description>` - Record a transaction manually\n" +
+        "`!funds log <message>` - Parse and record a transaction from a log message\n" +
         "`!funds history [type <type>] [category <category>] [from <date>] [to <date>]` - View transaction history"
       );
   }
@@ -450,5 +455,265 @@ async function handleViewHistoryInteraction(interaction: ButtonInteraction): Pro
   } catch (error) {
     console.error('Error handling view history button:', error);
     await interaction.editReply('An error occurred while fetching funds history.');
+  }
+}
+
+/**
+ * Parse a log message and extract transaction details
+ * @param logMessage The log message to parse
+ * @param recordedBy Who recorded this transaction
+ * @returns Transaction details or null if parsing failed
+ */
+export function parseLogTransaction(logMessage: string, recordedBy: string): FundTransaction | null {
+  try {
+    const message = logMessage.trim();
+    
+    // Transaction type patterns
+    const buyPatterns = [
+      /bought (\d+)x (.*?) at \$([\d,]+) each for a total of \$([\d,]+)/i,
+      /purchased (\d+)x (.*?) for \$([\d,]+)/i,
+      /bought (.*?) for \$([\d,]+)/i
+    ];
+    
+    const sellPatterns = [
+      /sold (\d+)x (.*?) at \$([\d,]+) each for a total of \$([\d,]+)/i,
+      /sold (.*?) for \$([\d,]+)/i
+    ];
+    
+    const depositPatterns = [
+      /deposited \$([\d,]+) into faction funds/i,
+      /added \$([\d,]+) to faction/i,
+      /donated \$([\d,]+) to faction/i
+    ];
+    
+    const withdrawPatterns = [
+      /withdrew \$([\d,]+) from faction funds/i,
+      /took \$([\d,]+) from faction/i
+    ];
+    
+    const upgradePatterns = [
+      /upgraded (.*?) for \$([\d,]+)/i,
+      /paid \$([\d,]+) for (.*?) upgrade/i
+    ];
+    
+    // Extract timestamp if present
+    let timestamp = new Date();
+    const timestampMatch = message.match(/(\d{2}:\d{2}:\d{2} - \d{2}\/\d{2}\/\d{2})/);
+    if (timestampMatch) {
+      const [, timeStampStr] = timestampMatch;
+      const [time, date] = timeStampStr.split(' - ');
+      const [day, month, year] = date.split('/');
+      const [hour, minute, second] = time.split(':');
+      timestamp = new Date(`20${year}-${month}-${day}T${hour}:${minute}:${second}`);
+    }
+    
+    // Check buy patterns (expense)
+    for (const pattern of buyPatterns) {
+      const match = message.match(pattern);
+      if (match) {
+        // Extract the last number in the match as the amount
+        const amountStr = match[match.length - 1].replace(/,/g, '');
+        const amount = parseInt(amountStr);
+        
+        if (isNaN(amount)) continue;
+        
+        const itemName = match[match.length - 2] || match[1];
+        
+        // Determine category based on item
+        const category = categorizeItem(itemName);
+        
+        return {
+          transaction_date: timestamp.toISOString(),
+          amount,
+          type: 'expense',
+          category,
+          description: `Purchased ${itemName}`,
+          recorded_by: recordedBy
+        };
+      }
+    }
+    
+    // Check sell patterns (income)
+    for (const pattern of sellPatterns) {
+      const match = message.match(pattern);
+      if (match) {
+        // Extract the last number in the match as the amount
+        const amountStr = match[match.length - 1].replace(/,/g, '');
+        const amount = parseInt(amountStr);
+        
+        if (isNaN(amount)) continue;
+        
+        const itemName = match[match.length - 2] || match[1];
+        
+        return {
+          transaction_date: timestamp.toISOString(),
+          amount,
+          type: 'income',
+          category: 'Item Sales',
+          description: `Sold ${itemName}`,
+          recorded_by: recordedBy
+        };
+      }
+    }
+    
+    // Check deposit patterns (income)
+    for (const pattern of depositPatterns) {
+      const match = message.match(pattern);
+      if (match) {
+        const amountStr = match[1].replace(/,/g, '');
+        const amount = parseInt(amountStr);
+        
+        if (isNaN(amount)) continue;
+        
+        return {
+          transaction_date: timestamp.toISOString(),
+          amount,
+          type: 'income',
+          category: 'Donations',
+          description: `Funds deposit`,
+          recorded_by: recordedBy
+        };
+      }
+    }
+    
+    // Check withdraw patterns (expense)
+    for (const pattern of withdrawPatterns) {
+      const match = message.match(pattern);
+      if (match) {
+        const amountStr = match[1].replace(/,/g, '');
+        const amount = parseInt(amountStr);
+        
+        if (isNaN(amount)) continue;
+        
+        return {
+          transaction_date: timestamp.toISOString(),
+          amount,
+          type: 'expense',
+          category: 'Other',
+          description: `Funds withdrawal`,
+          recorded_by: recordedBy
+        };
+      }
+    }
+    
+    // Check upgrade patterns (expense)
+    for (const pattern of upgradePatterns) {
+      const match = message.match(pattern);
+      if (match) {
+        const amountStr = match[match.length - 1].replace(/,/g, '');
+        const amount = parseInt(amountStr);
+        
+        if (isNaN(amount)) continue;
+        
+        const upgradeName = match[1];
+        
+        return {
+          transaction_date: timestamp.toISOString(),
+          amount,
+          type: 'expense',
+          category: 'Upgrades',
+          description: `Upgraded ${upgradeName}`,
+          recorded_by: recordedBy
+        };
+      }
+    }
+    
+    // No pattern matched
+    return null;
+  } catch (error) {
+    console.error('Error parsing log transaction:', error);
+    return null;
+  }
+}
+
+/**
+ * Determine category based on item name
+ */
+function categorizeItem(itemName: string): string {
+  itemName = itemName.toLowerCase();
+  
+  // Define category keywords
+  const categoryMap: Record<string, string[]> = {
+    "Weapons": ['gun', 'rifle', 'pistol', 'shotgun', 'machine', 'weapon'],
+    "Armor": ['body', 'helmet', 'armor', 'vest', 'tactical', 'kevlar'],
+    "Drugs": ['xanax', 'lsd', 'speed', 'pcp', 'vicodin', 'drug', 'cannabis', 'cocaine', 'ketamine', 'opium', 'shrooms', 'ecstasy'],
+    "Medical": ['medical', 'first aid', 'blood bag', 'morphine', 'melatonin', 'painkiller', 'energy drink', 'first-aid'],
+    "Temporary": ['bottle', 'drink', 'supply', 'boost', 'alcohol', 'beer', 'whiskey', 'energy drink'],
+    "Properties": ['property', 'mansion', 'house', 'apartment', 'palace'],
+    "Special": ['special', 'flower', 'plushie', 'book', 'mp3 player', 'dvd'],
+    "Items": ['item', 'key', 'ticket', 'box', 'candy', 'chocolate', 'sweet', 'food']
+  };
+  
+  // Check each category
+  for (const [category, keywords] of Object.entries(categoryMap)) {
+    if (keywords.some(keyword => itemName.includes(keyword))) {
+      return category;
+    }
+  }
+  
+  // Default category
+  return "Other";
+}
+
+/**
+ * Handle log parsing command
+ * This allows users to paste a log message and have it automatically parsed and recorded
+ */
+export async function handleLogParseCommand(message: Message, args: string[]): Promise<void> {
+  try {
+    if (args.length < 1) {
+      await message.reply(
+        "Please provide a log message to parse.\n" +
+        "Example: `!funds log You bought 100x Melatonin at $300,000 each for a total of $30,000,000 from the Pharmacy`"
+      );
+      return;
+    }
+    
+    // Get the full log message
+    const logMessage = args.join(' ');
+    
+    // Parse the log
+    const transaction = parseLogTransaction(logMessage, message.author.tag);
+    
+    if (!transaction) {
+      await message.reply("Could not parse the log message. Please check the format and try again.");
+      return;
+    }
+    
+    const progressMsg = await message.reply(`Parsed transaction: ${transaction.type} of $${transaction.amount.toLocaleString()} for ${transaction.category}. Recording...`);
+    
+    // Record the transaction
+    const transactionId = await recordFundTransaction(transaction);
+    
+    if (!transactionId) {
+      await progressMsg.edit('Failed to record transaction. Please try again.');
+      return;
+    }
+    
+    // Get updated balance
+    const latestFunds = await getLatestFundsSnapshot();
+    
+    // Create confirmation embed
+    const embed = new EmbedBuilder()
+      .setTitle(`${transaction.type === 'expense' ? '🔻 Expense' : '🔼 Income'} Recorded from Log`)
+      .setColor(transaction.type === 'expense' ? '#FF0000' : '#00AA00')
+      .addFields(
+        { name: 'Amount', value: `$${transaction.amount.toLocaleString()}`, inline: true },
+        { name: 'Category', value: transaction.category, inline: true },
+        { name: 'Recorded By', value: transaction.recorded_by, inline: true },
+        { name: 'Description', value: transaction.description },
+        { 
+          name: 'Updated Balance', 
+          value: latestFunds ? `$${latestFunds.faction_money.toLocaleString()}` : 'Unknown'
+        }
+      )
+      .setFooter({ text: `Transaction ID: ${transactionId}` })
+      .setTimestamp();
+    
+    await progressMsg.edit({ content: null, embeds: [embed] });
+    
+  } catch (error) {
+    console.error('Error handling log parse command:', error);
+    await message.reply('An error occurred while parsing the log.');
   }
 }
