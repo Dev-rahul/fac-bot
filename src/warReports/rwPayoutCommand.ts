@@ -161,7 +161,7 @@ export async function handleRWPayoutCommand(message: Message, args: string[]): P
       const hitMultiplier = config.hit_multiplier || 0;
       const rwHitMultiplier = config.rw_hit_multiplier || 0.8;
       const assistMultiplier = config.assist_multiplier || 0.2;
-      const payoutPercentage = config.payout_percentage || 85;
+      const payoutPercentage = config.payout_percentage || 90;
 
       // Calculate payout amount
       const totalPayout = totalRwCash * (payoutPercentage / 100);

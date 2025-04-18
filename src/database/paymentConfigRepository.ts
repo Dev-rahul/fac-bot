@@ -27,7 +27,7 @@ const defaultConfigs: Record<string, number> = {
   hit_multiplier: 0,
   rw_hit_multiplier: 0.8, 
   assist_multiplier: 0.2,
-  payout_percentage: 85 // Percentage of total RW cash to distribute
+  payout_percentage: 90 // Percentage of total RW cash to distribute
 };
 
 /**
